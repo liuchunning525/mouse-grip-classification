@@ -201,6 +201,9 @@ def main():
             height, width, _ = frame.shape
             hand_landmarks = detection_result.hand_landmarks[0]
 
+            # 以 wrist 的 z 作为参考
+            wrist_z = hand_landmarks[0].z if USE_WRIST_AS_Z_REF else 0.0
+
             for i, lm in enumerate(hand_landmarks):
                 api_x = lm.x
                 api_y = lm.y
@@ -211,6 +214,10 @@ def main():
 
                 real_x, real_y = pixel_to_world(pixel_x, pixel_y, H)
 
+                # MediaPipe z: closer to camera is usually more negative
+                # 为了让“更高/更靠近摄像头”显示为正值，这里取负号
+                scaled_z = -(api_z - wrist_z) * Z_SCALE
+
                 landmark_world_coords[i] = {
                     "name": landmark_names.get(i, f"lm_{i}"),
                     "api_x": api_x,
@@ -220,6 +227,7 @@ def main():
                     "pixel_y": pixel_y,
                     "real_x": real_x,
                     "real_y": real_y,
+                    "scaled_z": scaled_z,
                 }
 
             for idx in range(21):
@@ -231,15 +239,11 @@ def main():
                 py = int(info["pixel_y"])
                 real_x = info["real_x"]
                 real_y = info["real_y"]
-                name = info["name"]
+                scaled_z = info["scaled_z"]
 
-                text = f"{idx:02d} {name}: ({real_x:.1f},{real_y:.1f})cm"
-                important_landmarks_text.append(text)
-
-                # 在每个点旁边显示实际坐标
                 cv2.putText(
                     annotated_frame,
-                    f"{idx}:({real_x:.1f},{real_y:.1f})",
+                    f"{idx}:({real_x:.1f},{real_y:.1f},{scaled_z:.1f})",
                     (px + 6, py - 6),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.35,
