@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aim Task</title>
+  <style>
+    :root {
+      --bg: #09142f;
+      --panel: rgba(12, 24, 52, 0.92);
+      --text: #e5e7eb;
+      --muted: #a8b3c7;
+      --green: #65d46e;
+      --red: #eb5d54;
+      --blue: #6eb6ff;
+      --orange: #ffb74d;
+      --cyan: #5eead4;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #app {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      cursor: crosshair;
+      user-select: none;
+    }
+    #canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hud {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 20;
+      width: 360px;
+      max-width: calc(100vw - 24px);
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    input, select, button {
+      font-size: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      padding: 6px 10px;
+      outline: none;
+    }
+    input, select { min-width: 80px; }
+    button { cursor: pointer; }
+    button.primary {
+      background: var(--green);
+      color: #08210c;
+      font-weight: bold;
+      border: none;
+    }
+    button.secondary {
+      background: var(--cyan);
+      color: #082022;
+      font-weight: bold;
+      border: none;
+    }
+    button.danger {
+      background: var(--red);
+      color: white;
+      border: none;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #status {
+      white-space: pre-line;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+    .target {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--blue);
+      opacity: 0.35;
+      z-index: 10;
+      box-shadow: 0 0 0 6px rgba(110,182,255,0.08);
+    }
+    .target.active {
+      background: var(--orange);
+      opacity: 1;
+      box-shadow: 0 0 0 10px rgba(255,183,77,0.14);
+    }
+    .target.done {
+      background: var(--green);
+      opacity: 0.95;
+    }
+    #countdown {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      font-weight: bold;
+      color: white;
+      background: rgba(0,0,0,0.18);
+      pointer-events: none;
+    }
+    .camera-panel {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 20;
+      width: 260px;
+      background: rgba(7, 16, 34, 0.86);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+    .camera-title {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    #webcamPreview {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      background: black;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .camera-meta {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      background: #64748b;
+      vertical-align: middle;
+    }
+    .dot.live { background: var(--green); }
+    .dot.rec { background: var(--red); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <canvas id="canvas"></canvas>
+
+    <div class="hud">
+      <h1>Aim Task</h1>
+      <div class="row">
+        <label>用户 ID <input id="userId" value="user_001"></label>
+        <label>Session <input id="sessionId" value="session_001"></label>
+      </div>
+      <div class="row">
+        <label>目标数量
+          <select id="targetCount">
+            <option value="12" selected>12</option>
+            <option value="16">16</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <label>目标半径(px) <input id="targetRadius" type="number" value="24" min="8" max="60"></label>
+        <label>开始倒计时(秒) <input id="countdownSec" type="number" value="3" min="0" max="10"></label>
+      </div>
+      <div class="row">
+        <button id="connectCameraBtn" class="secondary">连接摄像头</button>
+        <button id="previewBtn">预览目标</button>
+        <button id="startBtn" class="primary">开始任务</button>
+      </div>
+      <div class="row">
+        <button id="finishBtn">结束并导出</button>
+        <button id="resetBtn" class="danger">重置</button>
+      </div>
+      <div id="status">状态：等待开始
+建议：先连接摄像头，再点“预览目标”，最后点“开始任务”。</div>
+    </div>
+
+    <div class="camera-panel">
+      <div class="camera-title">摄像头预览</div>
+      <video id="webcamPreview" autoplay muted playsinline></video>
+      <div id="cameraMeta" class="camera-meta"><span class="dot"></span>未连接摄像头</div>
+    </div>
+
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    const app = document.getElementById('app');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const connectCameraBtn = document.getElementById('connectCameraBtn');
+    const previewBtn = document.getElementById('previewBtn');
+    const startBtn = document.getElementById('startBtn');
+    const finishBtn = document.getElementById('finishBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const userIdEl = document.getElementById('userId');
+    const sessionIdEl = document.getElementById('sessionId');
+    const targetCountEl = document.getElementById('targetCount');
+    const targetRadiusEl = document.getElementById('targetRadius');
+    const countdownSecEl = document.getElementById('countdownSec');
+    const statusEl = document.getElementById('status');
+    const countdownEl = document.getElementById('countdown');
+    const webcamPreview = document.getElementById('webcamPreview');
+    const cameraMeta = document.getElementById('cameraMeta');
+
+    let targets = [];
+    let targetEls = [];
+    let trials = [];
+    let sessionTrack = [];
+    let currentTrial = null;
+    let activeIndex = -1;
+    let running = false;
+    let sessionStartPerf = null;
+    let sessionStartIso = null;
+    let lastPoint = null;
+
+    let mediaStream = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let videoBlob = null;
+    let recordingStartPerf = null;
+    let recordingStopPerf = null;
+    let recordingMimeType = null;
+    let cameraReady = false;
+    let isRecording = false;
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+    }
+
+    function setCameraMeta(msg, state = 'idle') {
+      const dotClass = state === 'live' ? 'dot live' : state === 'rec' ? 'dot rec' : 'dot';
+      cameraMeta.innerHTML = `<span class="${dotClass}"></span>${msg}`;
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function removeTargetEls() {
+      targetEls.forEach(el => el.remove());
+      targetEls = [];
+    }
+
+    function clearAllTargets() {
+      removeTargetEls();
+      targets = [];
+      activeIndex = -1;
+    }
+
+    function gridTargets(count) {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const panelRight = 12 + 360;
+      const cameraLeft = w - 12 - 260;
+      const safeLeft = panelRight + 70;
+      const safeRight = cameraLeft - 70;
+      const cx = Math.max((safeLeft + safeRight) / 2, w * 0.56);
+      const cy = h * 0.56;
+      const maxR = Math.min(safeRight - cx, cx - safeLeft, h * 0.34);
+      const radius = Math.max(120, Math.min(maxR, 280));
+      const pts = [];
+      const startAngle = -Math.PI / 2;
+      for (let i = 0; i < count; i++) {
+        const angle = startAngle + (Math.PI * 2 * i) / count;
+        pts.push({
+          id: i,
+          x: cx + radius * Math.cos(angle),
+          y: cy + radius * Math.sin(angle)
+        });
+      }
+      return pts;
+    }
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function generateTargets() {
+      const count = Number(targetCountEl.value);
+      targets = shuffle(gridTargets(count));
+    }
+
+    function renderTargets() {
+      removeTargetEls();
+      const r = Number(targetRadiusEl.value);
+      targets.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'target';
+        el.style.left = `${t.x}px`;
+        el.style.top = `${t.y}px`;
+        el.style.width = `${r * 2}px`;
+        el.style.height = `${r * 2}px`;
+        if (idx < activeIndex) el.classList.add('done');
+        if (idx === activeIndex) el.classList.add('active');
+        app.appendChild(el);
+        targetEls.push(el);
+      });
+    }
+
+    function updateTargets() {
+      targetEls.forEach((el, idx) => {
+        el.classList.remove('done', 'active');
+        if (idx < activeIndex) el.classList.add('done');
+        if (idx === activeIndex) el.classList.add('active');
+      });
+    }
+
+    function drawTrack() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (sessionTrack.length >= 2) {
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(101,212,110,0.75)';
+        ctx.moveTo(sessionTrack[0].x, sessionTrack[0].y);
+        for (let i = 1; i < sessionTrack.length; i++) {
+          ctx.lineTo(sessionTrack[i].x, sessionTrack[i].y);
+        }
+        ctx.stroke();
+      }
+      if (lastPoint) {
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.arc(lastPoint.x, lastPoint.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(drawTrack);
+    }
+    requestAnimationFrame(drawTrack);
+
+    function previewTargets() {
+      running = false;
+      trials = [];
+      sessionTrack = [];
+      currentTrial = null;
+      sessionStartPerf = null;
+      sessionStartIso = null;
+      generateTargets();
+      activeIndex = -1;
+      renderTargets();
+      lastPoint = null;
+      setStatus(`状态：预览模式\n已生成 ${targets.length} 个目标点。`);
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function runCountdown() {
+      const sec = Number(countdownSecEl.value);
+      if (sec <= 0) return;
+      countdownEl.style.display = 'flex';
+      for (let i = sec; i >= 1; i--) {
+        countdownEl.textContent = String(i);
+        await sleep(1000);
+      }
+      countdownEl.textContent = 'GO';
+      await sleep(500);
+      countdownEl.style.display = 'none';
+      countdownEl.textContent = '';
+    }
+
+    function elapsedMs() {
+      return performance.now() - sessionStartPerf;
+    }
+
+    function beginTrial(index) {
+      if (index >= targets.length) {
+        finishSession(true);
+        return;
+      }
+      activeIndex = index;
+      const t = targets[index];
+      currentTrial = {
+        trial_index: index,
+        target_id: t.id,
+        target_x: Number(t.x.toFixed(2)),
+        target_y: Number(t.y.toFixed(2)),
+        target_radius_px: Number(targetRadiusEl.value),
+        start_ms: Number(elapsedMs().toFixed(2)),
+        hit_ms: null,
+        duration_ms: null,
+        hit_x: null,
+        hit_y: null,
+        trajectory: []
+      };
+      updateTargets();
+      setStatus(`状态：进行中\n当前目标：${index + 1} / ${targets.length}\n录制状态：${isRecording ? '已开始' : '未录制'}`);
+    }
+
+    async function ensureCameraConnected() {
+      if (cameraReady && mediaStream) return true;
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            frameRate: { ideal: 30, max: 60 }
+          },
+          audio: false
+        });
+        webcamPreview.srcObject = mediaStream;
+        cameraReady = true;
+        connectCameraBtn.textContent = '摄像头已连接';
+        connectCameraBtn.disabled = true;
+        setCameraMeta('摄像头已连接，已预热，可低延迟开始录制', 'live');
+        return true;
+      } catch (err) {
+        cameraReady = false;
+        setCameraMeta(`摄像头连接失败：${err.message}`, 'idle');
+        setStatus(`状态：摄像头连接失败\n${err.message}`);
+        return false;
+      }
+    }
+
+    function chooseMimeType() {
+      const candidates = [
+        'video/webm;codecs=vp9',
+        'video/webm;codecs=vp8',
+        'video/webm',
+        'video/mp4'
+      ];
+      for (const type of candidates) {
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported(type)) {
+          return type;
+        }
+      }
+      return '';
+    }
+
+    function startRecording() {
+      if (!mediaStream) throw new Error('摄像头未连接');
+      recordedChunks = [];
+      videoBlob = null;
+      recordingStartPerf = performance.now();
+      recordingStopPerf = null;
+      recordingMimeType = chooseMimeType();
+      mediaRecorder = recordingMimeType ? new MediaRecorder(mediaStream, { mimeType: recordingMimeType }) : new MediaRecorder(mediaStream);
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) recordedChunks.push(event.data);
+      };
+      mediaRecorder.onstop = () => {
+        videoBlob = new Blob(recordedChunks, { type: recordingMimeType || 'video/webm' });
+        isRecording = false;
+        setCameraMeta('录制结束，视频可导出', 'live');
+      };
+      mediaRecorder.start(100);
+      isRecording = true;
+      setCameraMeta('正在录制摄像头视频', 'rec');
+    }
+
+    function stopRecordingIfNeeded() {
+      return new Promise((resolve) => {
+        if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+          isRecording = false;
+          resolve();
+          return;
+        }
+        recordingStopPerf = performance.now();
+        mediaRecorder.addEventListener('stop', () => resolve(), { once: true });
+        mediaRecorder.stop();
+      });
+    }
+
+    async function startTask() {
+      if (running) return;
+      const ok = await ensureCameraConnected();
+      if (!ok) return;
+
+      generateTargets();
+      renderTargets();
+      if (targets.length === 0) {
+        setStatus('状态：开始失败，目标点数量为 0');
+        return;
+      }
+
+      trials = [];
+      sessionTrack = [];
+      currentTrial = null;
+      lastPoint = null;
+      activeIndex = -1;
+      setStatus(`状态：准备开始\n本次目标数：${targets.length}\n正在启动录制...`);
+
+      try {
+        startRecording();
+      } catch (err) {
+        setStatus(`状态：录制启动失败\n${err.message}`);
+        return;
+      }
+
+      await runCountdown();
+      running = true;
+      sessionStartPerf = performance.now();
+      sessionStartIso = new Date().toISOString();
+      beginTrial(0);
+    }
+
+    function recordPoint(x, y) {
+      if (!running || sessionStartPerf === null) return;
+      const pt = {
+        t_ms: Number(elapsedMs().toFixed(2)),
+        x: Number(x.toFixed(2)),
+        y: Number(y.toFixed(2))
+      };
+      sessionTrack.push(pt);
+      if (currentTrial) currentTrial.trajectory.push(pt);
+      lastPoint = pt;
+    }
+
+    function sqDist(x1, y1, x2, y2) {
+      const dx = x1 - x2;
+      const dy = y1 - y2;
+      return dx * dx + dy * dy;
+    }
+
+    function tryHit(x, y) {
+      if (!running || !currentTrial || activeIndex < 0 || activeIndex >= targets.length) return;
+      const t = targets[activeIndex];
+      const r = Number(targetRadiusEl.value);
+      if (sqDist(x, y, t.x, t.y) <= r * r) {
+        const hitMs = Number(elapsedMs().toFixed(2));
+        currentTrial.hit_ms = hitMs;
+        currentTrial.duration_ms = Number((hitMs - currentTrial.start_ms).toFixed(2));
+        currentTrial.hit_x = Number(x.toFixed(2));
+        currentTrial.hit_y = Number(y.toFixed(2));
+        trials.push(currentTrial);
+        currentTrial = null;
+        activeIndex += 1;
+        updateTargets();
+        setTimeout(() => beginTrial(activeIndex), 120);
+      }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      recordPoint(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('click', (e) => {
+      recordPoint(e.clientX, e.clientY);
+      tryHit(e.clientX, e.clientY);
+    });
+
+    function exportData(completed) {
+      return {
+        schema_version: '1.1',
+        user_id: userIdEl.value.trim() || 'unknown_user',
+        session_id: sessionIdEl.value.trim() || 'unknown_session',
+        session_start_iso: sessionStartIso,
+        viewport: { width: window.innerWidth, height: window.innerHeight },
+        target_count: targets.length,
+        target_radius_px: Number(targetRadiusEl.value),
+        completed,
+        total_duration_ms: sessionStartPerf === null ? null : Number(elapsedMs().toFixed(2)),
+        recording_enabled: !!videoBlob || isRecording || !!mediaRecorder,
+        recording_mime_type: recordingMimeType,
+        recording_start_perf_ms: recordingStartPerf === null ? null : Number(recordingStartPerf.toFixed(2)),
+        recording_stop_perf_ms: recordingStopPerf === null ? null : Number(recordingStopPerf.toFixed(2)),
+        session_start_perf_ms: sessionStartPerf === null ? null : Number(sessionStartPerf.toFixed(2)),
+        video_task_offset_ms: (recordingStartPerf !== null && sessionStartPerf !== null) ? Number((sessionStartPerf - recordingStartPerf).toFixed(2)) : null,
+        targets_order: targets.map(t => ({ id: t.id, x: Number(t.x.toFixed(2)), y: Number(t.y.toFixed(2)) })),
+        trials,
+        session_mouse_track: sessionTrack
+      };
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadJson(obj, filename) {
+      const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+      downloadBlob(blob, filename);
+    }
+
+    async function finishSession(auto) {
+      if (sessionStartPerf === null) {
+        setStatus('状态：还没有开始任务');
+        return;
+      }
+      if (!auto && trials.length === 0) {
+        setStatus('状态：尚未命中任何目标，不能导出');
+        return;
+      }
+
+      running = false;
+      const done = auto || activeIndex >= targets.length;
+      setStatus(`状态：正在结束任务\n完成 trial 数：${trials.length} / ${targets.length}\n正在停止录制并导出文件...`);
+
+      await stopRecordingIfNeeded();
+
+      const data = exportData(done);
+      const baseName = `${data.user_id}_${data.session_id}`;
+      downloadJson(data, `${baseName}_task_log.json`);
+
+      if (videoBlob) {
+        const ext = (recordingMimeType && recordingMimeType.includes('mp4')) ? 'mp4' : 'webm';
+        downloadBlob(videoBlob, `${baseName}_webcam.${ext}`);
+      }
+
+      setStatus(`状态：任务结束\n完成 trial 数：${trials.length} / ${targets.length}\n已导出日志和视频`);
+    }
+
+    async function resetAll() {
+      running = false;
+      currentTrial = null;
+      trials = [];
+      sessionTrack = [];
+      sessionStartPerf = null;
+      sessionStartIso = null;
+      lastPoint = null;
+      activeIndex = -1;
+      clearAllTargets();
+      await stopRecordingIfNeeded();
+      recordedChunks = [];
+      videoBlob = null;
+      recordingStartPerf = null;
+      recordingStopPerf = null;
+      setStatus('状态：等待开始\n建议：先连接摄像头，再点“预览目标”，最后点“开始任务”。');
+      if (cameraReady) {
+        setCameraMeta('摄像头已连接，等待开始录制', 'live');
+      } else {
+        setCameraMeta('未连接摄像头', 'idle');
+      }
+    }
+
+    connectCameraBtn.addEventListener('click', ensureCameraConnected);
+    previewBtn.addEventListener('click', previewTargets);
+    startBtn.addEventListener('click', startTask);
+    finishBtn.addEventListener('click', () => finishSession(false));
+    resetBtn.addEventListener('click', resetAll);
+
+    resetAll();
+  </script>
+</body>
+</html>
