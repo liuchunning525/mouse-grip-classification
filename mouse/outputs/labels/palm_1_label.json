@@ -1,7 +1,0 @@
-{
-  "sample_id": "palm_1",
-  "label": "palm",
-  "image": "images\\palm_1.jpg",
-  "hand_json": "outputs\\palm_1_hand\\palm_1_hand_landmarks.json",
-  "current_pose_json": "outputs\\palm_1_current_pose.json"
-}
