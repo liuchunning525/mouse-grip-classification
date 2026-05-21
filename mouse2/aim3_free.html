@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aim Task v3 | 自动保存到桌面/新建文件夹 (File System Access API)</title>
+  <style>
+    :root {
+      --bg: #09142f;
+      --panel: rgba(12, 24, 52, 0.92);
+      --text: #e5e7eb;
+      --muted: #a8b3c7;
+      --green: #65d46e;
+      --red: #eb5d54;
+      --blue: #6eb6ff;
+      --orange: #ffb74d;
+      --cyan: #5eead4;
+      --purple: #c084fc;
+    }
+    * { box-sizing: border-box; user-select: none; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #app {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      cursor: crosshair;
+    }
+    #canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hud {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 20;
+      width: 380px;
+      max-width: calc(100vw - 296px);
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+    h1 { margin: 0 0 8px 0; font-size: 18px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
+    label { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+    input, select, button { font-size: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: var(--text); padding: 6px 10px; outline: none; }
+    input, select { min-width: 80px; }
+    button { cursor: pointer; transition: 0.1s; }
+    button.primary { background: var(--green); color: #08210c; font-weight: bold; border: none; }
+    button.secondary { background: var(--cyan); color: #082022; font-weight: bold; border: none; }
+    button.photo-btn { background: var(--purple); color: #1a102e; font-weight: bold; border: none; }
+    button.danger { background: var(--red); color: white; border: none; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #status { white-space: pre-line; color: var(--muted); font-size: 12px; line-height: 1.4; margin-top: 6px; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.35; }
+    .target {
+      position: absolute; transform: translate(-50%, -50%); border-radius: 50%;
+      background: var(--blue); opacity: 0.35; z-index: 10;
+      box-shadow: 0 0 0 6px rgba(110,182,255,0.08);
+    }
+    .target.active { background: var(--orange); opacity: 1; box-shadow: 0 0 0 10px rgba(255,183,77,0.14); }
+    .target.done { background: var(--green); opacity: 0.95; }
+    #countdown {
+      position: absolute; inset: 0; z-index: 30; display: none;
+      align-items: center; justify-content: center; font-size: 120px; font-weight: bold;
+      color: white; background: rgba(0,0,0,0.18); pointer-events: none;
+      text-shadow: 0 0 12px black;
+    }
+    .camera-panel {
+      position: absolute; right: 12px; top: 12px; z-index: 20; width: 280px;
+      background: rgba(7, 16, 34, 0.92); border-radius: 14px; padding: 12px;
+      backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .camera-title { font-size: 13px; color: var(--muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+    #webcamPreview { width: 100%; aspect-ratio: 4 / 3; border-radius: 10px; background: black; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
+    .camera-meta { margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: #64748b; vertical-align: middle; }
+    .dot.live { background: var(--green); }
+    .dot.rec { background: var(--red); }
+    .snapshot-msg { background: #2a2f4b; border-radius: 12px; padding: 4px 8px; font-size: 11px; margin-top: 8px; text-align: center; color: var(--cyan); }
+    .folder-status { background: #0f1a2e; border-radius: 12px; padding: 4px 8px; font-size: 11px; margin-top: 6px; color: #a0b3d9; word-break: break-all; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <canvas id="canvas"></canvas>
+  <div class="hud">
+    <h1>Aim Task v3 📁 固定保存到桌面/新建文件夹</h1>
+    <div class="row">
+      <label>用户 ID <input id="userId" value="user_001"></label>
+      <label>Session <input id="sessionId" value="session_01"></label>
+    </div>
+    <div class="row">
+      <label>Mouse <select id="mouseId"><option value="G102">G102</option><option value="XliteV3ES">XliteV3ES</option><option value="X2H">X2H</option></select></label>
+      <label>Grip <select id="gripLabel"><option value="palm">palm</option><option value="claw">claw</option><option value="finger">finger</option><option value="free">free</option></select></label>
+    </div>
+    <div class="row">
+      <label>Condition <select id="condition"><option value="A">A：目标较大/较近</option><option value="B">B：目标较大/较远</option><option value="C">C：目标较小/较近</option><option value="D">D：目标较小/较远</option></select></label>
+      <label>倒计时(秒) <input id="countdownSec" type="number" value="3" min="0" max="10"></label>
+    </div>
+    <div class="row">
+      <label>目标数量 <input id="targetCount" type="number" value="13" min="5" max="25" step="2"></label>
+      <label>跳跃间隔 <input id="minGap" type="number" value="3" min="2" max="6"></label>
+    </div>
+    <div class="row">
+      <label>目标半径(px) <input id="targetRadius" type="number" value="30" min="6" max="60"></label>
+      <label>环半径(px) <input id="ringRadius" type="number" value="170" min="80" max="500"></label>
+    </div>
+    <div class="hint">📁 自动保存路径: <strong>桌面/新建文件夹/user_xxx/mouse/grip/Condition A/B/C/D/</strong> (仅首次请求权限，之后自动记忆)</div>
+    <div class="row">
+      <button id="connectCameraBtn" class="secondary">连接摄像头</button>
+      <button id="snapshotBtn" class="photo-btn">📸 拍照保存</button>
+    </div>
+    <div class="row">
+      <button id="previewBtn">预览目标</button>
+      <button id="startBtn" class="primary">开始任务</button>
+    </div>
+    <div class="row">
+      <button id="finishBtn">结束并导出(自动存)</button>
+      <button id="resetBtn" class="danger">重置</button>
+    </div>
+    <div id="status">状态：等待开始<br>✨ 首次会弹窗选择「桌面/新建文件夹」, 之后永久保存到此目录</div>
+    <div id="folderHint" class="folder-status">📁 未设置目标根目录 (首次导出时选择桌面上的「新建文件夹」)</div>
+  </div>
+  <div class="camera-panel">
+    <div class="camera-title"><span>📷 摄像头</span><span style="font-size:10px;">拍照自动下载</span></div>
+    <video id="webcamPreview" autoplay muted playsinline></video>
+    <div id="cameraMeta" class="camera-meta"><span class="dot"></span>未连接摄像头</div>
+    <div id="snapshotFeedback" class="snapshot-msg" style="display:none;"></div>
+  </div>
+  <div id="countdown"></div>
+</div>
+
+<script>
+  // ----- DOM 元素 -----
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const connectCameraBtn = document.getElementById('connectCameraBtn');
+  const snapshotBtn = document.getElementById('snapshotBtn');
+  const previewBtn = document.getElementById('previewBtn');
+  const startBtn = document.getElementById('startBtn');
+  const finishBtn = document.getElementById('finishBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const userIdEl = document.getElementById('userId');
+  const sessionIdEl = document.getElementById('sessionId');
+  const mouseIdEl = document.getElementById('mouseId');
+  const gripLabelEl = document.getElementById('gripLabel');
+  const conditionEl = document.getElementById('condition');
+  const targetCountEl = document.getElementById('targetCount');
+  const minGapEl = document.getElementById('minGap');
+  const targetRadiusEl = document.getElementById('targetRadius');
+  const ringRadiusEl = document.getElementById('ringRadius');
+  const countdownSecEl = document.getElementById('countdownSec');
+  const statusEl = document.getElementById('status');
+  const countdownEl = document.getElementById('countdown');
+  const webcamPreview = document.getElementById('webcamPreview');
+  const cameraMeta = document.getElementById('cameraMeta');
+  const snapshotFeedback = document.getElementById('snapshotFeedback');
+  const folderHint = document.getElementById('folderHint');
+
+  // ----- 全局状态 -----
+  let targets = [], targetEls = [], targetOrder = [];
+  let trials = [], sessionTrack = [], currentTrial = null;
+  let activeIndex = -1, running = false;
+  let sessionStartPerf = null, sessionStartIso = null, lastPoint = null;
+  let photoSnapshots = [];   // 拍照元数据
+  let mediaStream = null, mediaRecorder = null, recordedChunks = [];
+  let videoBlob = null, recordingStartPerf = null, recordingStopPerf = null;
+  let recordingMimeType = null, cameraReady = false, isRecording = false;
+
+  // ---------- 持久化根目录 (桌面/新建文件夹) ----------
+  let rootDirectoryHandle = null;         // 存储用户选择的根目录句柄 (桌面/新建文件夹)
+  const ROOT_DIR_KEY = 'aimtask_root_directory_id';   // IndexedDB 存储句柄 (File System Access API 可持久化权限)
+
+  // 检查/申请读写权限：IndexedDB 只能记住目录句柄，不能保证每次都有写入权限
+  async function verifyPermission(fileHandle, readWrite = true) {
+    if (!fileHandle || !fileHandle.queryPermission) return true;
+    const options = readWrite ? { mode: 'readwrite' } : {};
+    if ((await fileHandle.queryPermission(options)) === 'granted') return true;
+    if ((await fileHandle.requestPermission(options)) === 'granted') return true;
+    return false;
+  }
+  
+  // 尝试从 indexedDB 恢复根目录句柄
+  async function loadStoredRootDirectory() {
+    if (!window.showDirectoryPicker) {
+      folderHint.innerHTML = '⚠️ 浏览器不支持File System Access API，将使用传统下载方式';
+      return false;
+    }
+    try {
+      const request = indexedDB.open('AimTaskRootDirDB', 1);
+      return new Promise((resolve) => {
+        request.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains('roots')) db.createObjectStore('roots', { keyPath: 'id' });
+        };
+        request.onsuccess = async (e) => {
+          const db = e.target.result;
+          const tx = db.transaction('roots', 'readonly');
+          const store = tx.objectStore('roots');
+          const getReq = store.get('mainRoot');
+          getReq.onsuccess = async () => {
+            const savedHandle = getReq.result?.handle;
+            if (!savedHandle) { resolve(false); return; }
+            try {
+              const ok = await verifyPermission(savedHandle, true);
+              if (!ok) {
+                rootDirectoryHandle = null;
+                folderHint.innerHTML = `📁 已找到上次目录，但需要重新授权写入权限`;
+                resolve(false);
+                return;
+              }
+              rootDirectoryHandle = savedHandle;
+              folderHint.innerHTML = `✅ 目标根目录: ${rootDirectoryHandle.name || '新建文件夹'} (已恢复写入权限)`;
+              resolve(true);
+            } catch (err) {
+              console.warn('目录句柄恢复失败，需要重新选择', err);
+              rootDirectoryHandle = null;
+              folderHint.innerHTML = `📁 需要重新选择「桌面/新建文件夹」`;
+              resolve(false);
+            }
+          };
+          getReq.onerror = () => resolve(false);
+        };
+        request.onerror = () => resolve(false);
+      });
+    } catch (e) {
+      console.warn(e);
+      return false;
+    }
+  }
+
+  // 保存根目录句柄到 indexedDB
+  async function persistRootHandle(handle) {
+    if (!handle) return;
+    const request = indexedDB.open('AimTaskRootDirDB', 1);
+    return new Promise((resolve, reject) => {
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('roots')) db.createObjectStore('roots', { keyPath: 'id' });
+      };
+      request.onsuccess = (e) => {
+        const db = e.target.result;
+        const tx = db.transaction('roots', 'readwrite');
+        const store = tx.objectStore('roots');
+        const putReq = store.put({ id: 'mainRoot', handle: handle });
+        putReq.onsuccess = () => resolve();
+        putReq.onerror = (err) => reject(err);
+      };
+      request.onerror = (err) => reject(err);
+    });
+  }
+
+  // 请求用户选择根目录: 引导用户选择桌面上的「新建文件夹」
+  async function requestRootDirectory() {
+    if (!window.showDirectoryPicker) {
+      alert('您的浏览器不支持文件系统API，无法自动建立文件夹结构，将使用传统下载方式。建议使用最新版 Chrome 或 Edge，并用 http://localhost 打开本页面。');
+      return null;
+    }
+    try {
+      // 浏览器安全限制：网页不能真正“静默”指定桌面路径。首次必须由用户选择一次「桌面/新建文件夹」。
+      // startIn:'desktop' 只是在支持的浏览器中默认打开桌面位置。
+      let handle;
+      try {
+        handle = await window.showDirectoryPicker({ mode: 'readwrite', startIn: 'desktop' });
+      } catch (e) {
+        handle = await window.showDirectoryPicker({ mode: 'readwrite' });
+      }
+      const ok = await verifyPermission(handle, true);
+      if (!ok) {
+        folderHint.innerHTML = `❌ 没有获得写入权限，将采用普通下载模式`;
+        return null;
+      }
+      folderHint.innerHTML = `📁 已选定根目录: ${handle.name}；之后会自动在里面创建 user/grip/Condition 文件夹`;
+      rootDirectoryHandle = handle;
+      await persistRootHandle(handle);
+      return handle;
+    } catch (err) {
+      console.error('选择文件夹失败', err);
+      folderHint.innerHTML = `❌ 未选中文件夹，将采用普通下载模式`;
+      return null;
+    }
+  }
+
+  // 确保根目录已就绪 (如果未加载则尝试恢复，否则弹出选择)
+  async function ensureRootDirectory() {
+    if (rootDirectoryHandle) return rootDirectoryHandle;
+    // 尝试从IndexedDB恢复
+    await loadStoredRootDirectory();
+    if (rootDirectoryHandle) return rootDirectoryHandle;
+    // 没有有效句柄，请求用户选择
+    const newHandle = await requestRootDirectory();
+    if (newHandle) {
+      rootDirectoryHandle = newHandle;
+      return rootDirectoryHandle;
+    } else {
+      // 用户取消或失败，降级传统模式
+      return null;
+    }
+  }
+
+  // 核心保存函数：根据 user / grip / ConditionX 自动创建嵌套文件夹并保存 json + 视频
+  async function saveWithAutoFolders(jsonData, videoBlobData, mimeType) {
+    const root = await ensureRootDirectory();
+    if (!root) return false;
+
+    const ok = await verifyPermission(root, true);
+    if (!ok) {
+      setStatus('没有文件夹写入权限，采用传统下载备份');
+      rootDirectoryHandle = null;
+      return false;
+    }
+
+    const userId = userIdEl.value.trim() || 'unknown_user';
+    const mouseId = mouseIdEl.value;
+    const grip = gripLabelEl.value;
+    const condition = conditionEl.value;
+    const conditionFolder = `Condition ${condition}`;
+    const sessionId = sessionIdEl.value.trim() || 'session_01';
+
+    try {
+      // Desired structure:
+      // root/user_001/G102/palm/Condition A/
+      const userDir = await root.getDirectoryHandle(userId, { create: true });
+      const mouseDir = await userDir.getDirectoryHandle(mouseId, { create: true });
+      const gripDir = await mouseDir.getDirectoryHandle(grip, { create: true });
+      const condDir = await gripDir.getDirectoryHandle(conditionFolder, { create: true });
+
+      const jsonName = `${userId}_${mouseId}_${sessionId}_${condition}_task_log.json`;
+      const videoExt = (mimeType && mimeType.includes('mp4')) ? 'mp4' : 'webm';
+      const videoName = `${userId}_${mouseId}_${grip}_${condition}_${sessionId}_webcam.${videoExt}`;
+
+      const jsonFile = await condDir.getFileHandle(jsonName, { create: true });
+      const writableJson = await jsonFile.createWritable();
+      await writableJson.write(JSON.stringify(jsonData, null, 2));
+      await writableJson.close();
+
+      if (videoBlobData && videoBlobData.size > 0) {
+        const videoFile = await condDir.getFileHandle(videoName, { create: true });
+        const writableVideo = await videoFile.createWritable();
+        await writableVideo.write(videoBlobData);
+        await writableVideo.close();
+
+        setStatus(`✅ 保存成功: ${userId}/${mouseId}/${grip}/${conditionFolder}/${jsonName} + ${videoName}`);
+        folderHint.innerHTML = `✅ 已保存至: ${root.name}/${userId}/${mouseId}/${grip}/${conditionFolder}/`;
+      } else {
+        setStatus(`✅ 日志保存成功: ${userId}/${mouseId}/${grip}/${conditionFolder}/${jsonName}`);
+        folderHint.innerHTML = `✅ 已保存至: ${root.name}/${userId}/${mouseId}/${grip}/${conditionFolder}/`;
+      }
+
+      return true;
+    } catch (err) {
+      console.error('文件夹写入失败', err);
+      setStatus(`文件夹写入错误: ${err.name || ''} ${err.message}，采用传统下载备份`);
+      return false;
+    }
+  }
+
+  // 传统降级下载 (保持原文件名结构)
+  function fallbackDownload(jsonObj, videoBlobData, mimeType) {
+    const userId = userIdEl.value.trim() || 'unknown';
+    const mouseId = mouseIdEl.value;
+    const grip = gripLabelEl.value;
+    const cond = conditionEl.value;
+    const sessionId = sessionIdEl.value.trim() || 'session_01';
+
+    const jsonBase = `${userId}_${mouseId}_${sessionId}_${cond}`;
+    downloadJson(jsonObj, `${jsonBase}_task_log.json`);
+
+    if (videoBlobData && videoBlobData.size > 0) {
+      const ext = (mimeType && mimeType.includes('mp4')) ? 'mp4' : 'webm';
+      downloadBlob(videoBlobData, `${userId}_${mouseId}_${grip}_${cond}_${sessionId}_webcam.${ext}`);
+    }
+    setStatus(`已通过传统方式下载 (未使用文件夹API)`);
+  }
+  function downloadBlob(blob, filename) { const a = document.createElement('a'); const url = URL.createObjectURL(blob); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+  function downloadJson(obj, filename) { const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' }); downloadBlob(blob, filename); }
+
+  // ----- 其他实验逻辑 -----
+  function setStatus(msg) { statusEl.textContent = msg; }
+  function setCameraMeta(msg, state = 'idle') {
+    const dotClass = state === 'live' ? 'dot live' : state === 'rec' ? 'dot rec' : 'dot';
+    cameraMeta.innerHTML = `<span class="${dotClass}"></span>${msg}`;
+  }
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function applyConditionDefaults() {
+    const cond = conditionEl.value;
+
+    if (cond === 'A') {
+      // 大目标 / 近距离
+      targetRadiusEl.value = 30;
+      ringRadiusEl.value = 170;
+    } else if (cond === 'B') {
+      // 大目标 / 远距离
+      targetRadiusEl.value = 30;
+      ringRadiusEl.value = 310;
+    } else if (cond === 'C') {
+      // 小目标 / 近距离
+      targetRadiusEl.value = 10;
+      ringRadiusEl.value = 170;
+    } else if (cond === 'D') {
+      // 小目标 / 远距离
+      targetRadiusEl.value = 10;
+      ringRadiusEl.value = 310;
+    }
+  }
+  function removeTargetEls() { targetEls.forEach(el => el.remove()); targetEls = []; }
+  function clearAllTargets() { removeTargetEls(); targets = []; targetOrder = []; activeIndex = -1; }
+  function buildTargetPositions(count, ringRadius) {
+    const w = window.innerWidth, h = window.innerHeight;
+    const panelRight = 12 + 380, cameraLeft = w - 12 - 280;
+    const safeLeft = panelRight + 75, safeRight = cameraLeft - 75;
+    const cx = Math.max((safeLeft + safeRight) / 2, w * 0.56);
+    const cy = h * 0.56;
+    const pts = [], startAngle = -Math.PI / 2;
+    for (let i = 0; i < count; i++) {
+      const angle = startAngle + (Math.PI * 2 * i) / count;
+      pts.push({ id: i, x: cx + ringRadius * Math.cos(angle), y: cy + ringRadius * Math.sin(angle) });
+    }
+    return pts;
+  }
+  function ringDistance(a, b, n) { const d = Math.abs(a - b); return Math.min(d, n - d); }
+  function buildJumpOrder(count, minGap) {
+    const order = [];
+    const remaining = new Set([...Array(count).keys()]);
+    let current = Math.floor(Math.random() * count);
+    order.push(current);
+    remaining.delete(current);
+    while (remaining.size > 0) {
+      let candidates = [...remaining].filter(id => ringDistance(current, id, count) >= minGap);
+      if (candidates.length === 0) candidates = [...remaining];
+      const next = candidates[Math.floor(Math.random() * candidates.length)];
+      order.push(next);
+      remaining.delete(next);
+      current = next;
+    }
+    return order;
+  }
+  function generateTargets() {
+    let count = Number(targetCountEl.value);
+    if (count % 2 === 0) count += 1;
+    targetCountEl.value = count;
+    targets = buildTargetPositions(count, Number(ringRadiusEl.value));
+    targetOrder = buildJumpOrder(count, Number(minGapEl.value));
+  }
+  function renderTargets() {
+    removeTargetEls();
+    const r = Number(targetRadiusEl.value);
+    targets.forEach((t, idx) => {
+      const el = document.createElement('div');
+      el.className = 'target';
+      el.style.left = `${t.x}px`; el.style.top = `${t.y}px`;
+      el.style.width = `${r * 2}px`; el.style.height = `${r * 2}px`;
+      if (targetOrder[activeIndex] === t.id) el.classList.add('active');
+      if (activeIndex > 0 && targetOrder.slice(0, activeIndex).includes(t.id)) el.classList.add('done');
+      app.appendChild(el);
+      targetEls.push(el);
+    });
+  }
+  function updateTargets() {
+    targetEls.forEach((el, idx) => {
+      el.classList.remove('done', 'active');
+      const targetId = targets[idx].id;
+      if (activeIndex > 0 && targetOrder.slice(0, activeIndex).includes(targetId)) el.classList.add('done');
+      if (targetOrder[activeIndex] === targetId) el.classList.add('active');
+    });
+  }
+  function drawTrack() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (sessionTrack.length >= 2) {
+      ctx.beginPath(); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(101,212,110,0.75)';
+      ctx.moveTo(sessionTrack[0].x, sessionTrack[0].y);
+      for (let i = 1; i < sessionTrack.length; i++) ctx.lineTo(sessionTrack[i].x, sessionTrack[i].y);
+      ctx.stroke();
+    }
+    if (lastPoint) { ctx.beginPath(); ctx.fillStyle = 'white'; ctx.arc(lastPoint.x, lastPoint.y, 3.5, 0, Math.PI * 2); ctx.fill(); }
+    requestAnimationFrame(drawTrack);
+  }
+  drawTrack();
+
+  function previewTargets() {
+    running = false; trials = []; sessionTrack = []; currentTrial = null;
+    sessionStartPerf = null; sessionStartIso = null; activeIndex = -1; lastPoint = null;
+    generateTargets(); renderTargets();
+    setStatus(`已预览 | 目标数:${targets.length}`);
+  }
+  function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+  async function runCountdown() {
+    const sec = Number(countdownSecEl.value);
+    if (sec <= 0) return;
+    countdownEl.style.display = 'flex';
+    for (let i = sec; i >= 1; i--) { countdownEl.textContent = String(i); await sleep(1000); }
+    countdownEl.textContent = 'GO'; await sleep(500); countdownEl.style.display = 'none'; countdownEl.textContent = '';
+  }
+  function elapsedMs() { return performance.now() - sessionStartPerf; }
+  function beginTrial(index) {
+    if (index >= targetOrder.length) { finishSession(true); return; }
+    activeIndex = index;
+    const targetId = targetOrder[index];
+    const t = targets.find(v => v.id === targetId);
+    currentTrial = {
+      trial_index: index, target_id: t.id, target_x: Number(t.x.toFixed(2)), target_y: Number(t.y.toFixed(2)),
+      target_radius_px: Number(targetRadiusEl.value), ring_radius_px: Number(ringRadiusEl.value),
+      mouse_id: mouseIdEl.value, grip_label: gripLabelEl.value, condition: conditionEl.value,
+      start_ms: Number(elapsedMs().toFixed(2)), hit_ms: null, duration_ms: null, hit_x: null, hit_y: null, trajectory: []
+    };
+    updateTargets();
+    setStatus(`进行中 | 目标 ${index+1}/${targetOrder.length}`);
+  }
+
+  async function ensureCameraConnected() {
+    if (cameraReady && mediaStream?.active) return true;
+    try {
+      if (mediaStream) mediaStream.getTracks().forEach(t => t.stop());
+      mediaStream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } }, audio: false });
+      webcamPreview.srcObject = mediaStream;
+      cameraReady = true;
+      connectCameraBtn.textContent = '摄像头已连接'; connectCameraBtn.disabled = true;
+      setCameraMeta('摄像头已连接', 'live');
+      return true;
+    } catch (err) {
+      cameraReady = false;
+      setCameraMeta(`连接失败`, 'idle');
+      setStatus(`摄像头错误: ${err.message}`);
+      return false;
+    }
+  }
+
+  async function captureAndSavePhoto() {
+    if (!cameraReady || !mediaStream || !webcamPreview.videoWidth) {
+      const ok = await ensureCameraConnected();
+      if (!ok) { showSnapshotMsg('❌ 未连接摄像头'); return; }
+      await sleep(100);
+    }
+    const video = webcamPreview;
+    if (!video.videoWidth || !video.videoHeight) { showSnapshotMsg('⏳ 摄像头未就绪'); return; }
+    const canvasCap = document.createElement('canvas');
+    canvasCap.width = video.videoWidth; canvasCap.height = video.videoHeight;
+    canvasCap.getContext('2d').drawImage(video, 0, 0);
+    canvasCap.toBlob((blob) => {
+      if (!blob) { showSnapshotMsg('拍照失败'); return; }
+      const userId = userIdEl.value.trim() || 'unknown';
+      const grip = gripLabelEl.value;
+      const cond = conditionEl.value;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      const filename = `snapshot_${userId}_${grip}_${cond}_${timestamp}.png`;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      photoSnapshots.push({ capture_iso: new Date().toISOString(), session_active: running, filename, grip, condition: cond, user_id: userId });
+      showSnapshotMsg(`📸 已保存: ${filename}`);
+    }, 'image/png', 0.95);
+  }
+  function showSnapshotMsg(msg) { snapshotFeedback.textContent = msg; snapshotFeedback.style.display = 'block'; setTimeout(() => { snapshotFeedback.style.display = 'none'; }, 1800); }
+
+  function chooseMimeType() {
+    const candidates = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
+    for (const t of candidates) if (MediaRecorder.isTypeSupported(t)) return t;
+    return '';
+  }
+  function startRecording() {
+    if (!mediaStream) throw new Error('摄像头未连接');
+    recordedChunks = []; videoBlob = null;
+    recordingStartPerf = performance.now();
+    recordingMimeType = chooseMimeType();
+    mediaRecorder = new MediaRecorder(mediaStream, { mimeType: recordingMimeType });
+    mediaRecorder.ondataavailable = (e) => { if (e.data?.size) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = () => { videoBlob = new Blob(recordedChunks, { type: recordingMimeType || 'video/webm' }); isRecording = false; setCameraMeta('录制结束', 'live'); };
+    mediaRecorder.start(100); isRecording = true; setCameraMeta('录制中...', 'rec');
+  }
+  async function stopRecordingIfNeeded() {
+    return new Promise((resolve) => {
+      if (!mediaRecorder || mediaRecorder.state === 'inactive') { isRecording = false; resolve(); return; }
+      recordingStopPerf = performance.now();
+      mediaRecorder.addEventListener('stop', () => resolve(), { once: true });
+      mediaRecorder.stop();
+    });
+  }
+
+  async function startTask() {
+    if (running) return;
+    const ok = await ensureCameraConnected();
+    if (!ok) return;
+    generateTargets(); renderTargets();
+    if (!targets.length) { setStatus('无目标'); return; }
+    trials = []; sessionTrack = []; photoSnapshots = []; currentTrial = null; lastPoint = null; activeIndex = -1;
+    setStatus(`开始录制+倒计时`);
+    try { startRecording(); } catch(e) { setStatus(`录制启动失败`); return; }
+    await runCountdown();
+    running = true;
+    sessionStartPerf = performance.now();
+    sessionStartIso = new Date().toISOString();
+    beginTrial(0);
+  }
+  function recordPoint(x, y) {
+    if (!running || !sessionStartPerf) return;
+    const pt = { t_ms: Number(elapsedMs().toFixed(2)), x: Number(x.toFixed(2)), y: Number(y.toFixed(2)) };
+    sessionTrack.push(pt);
+    if (currentTrial) currentTrial.trajectory.push(pt);
+    lastPoint = pt;
+  }
+  function tryHit(x, y) {
+    if (!running || !currentTrial || activeIndex < 0) return;
+    const targetId = targetOrder[activeIndex];
+    const t = targets.find(v => v.id === targetId);
+    const r = Number(targetRadiusEl.value);
+    if ((x - t.x) ** 2 + (y - t.y) ** 2 <= r * r) {
+      const hitMs = Number(elapsedMs().toFixed(2));
+      currentTrial.hit_ms = hitMs; currentTrial.duration_ms = Number((hitMs - currentTrial.start_ms).toFixed(2));
+      currentTrial.hit_x = Number(x.toFixed(2)); currentTrial.hit_y = Number(y.toFixed(2));
+      trials.push(currentTrial); currentTrial = null;
+      activeIndex += 1; updateTargets();
+      setTimeout(() => beginTrial(activeIndex), 120);
+    }
+  }
+  window.addEventListener('mousemove', (e) => recordPoint(e.clientX, e.clientY));
+  window.addEventListener('click', (e) => { recordPoint(e.clientX, e.clientY); tryHit(e.clientX, e.clientY); });
+
+  function exportDataObject(completed) {
+    return {
+      schema_version: '4.0_auto_folder_fixed',
+      user_id: userIdEl.value.trim(), session_id: sessionIdEl.value.trim(),
+      mouse_id: mouseIdEl.value, grip_label: gripLabelEl.value, condition: conditionEl.value,
+      session_start_iso: sessionStartIso, viewport: { width: window.innerWidth, height: window.innerHeight },
+      target_count: targets.length, target_radius_px: Number(targetRadiusEl.value), ring_radius_px: Number(ringRadiusEl.value),
+      min_gap: Number(minGapEl.value), completed,
+      total_duration_ms: sessionStartPerf ? Number(elapsedMs().toFixed(2)) : null,
+      recording_enabled: !!videoBlob, recording_mime_type: recordingMimeType,
+      recording_start_perf_ms: recordingStartPerf, recording_stop_perf_ms: recordingStopPerf,
+      session_start_perf_ms: sessionStartPerf,
+      video_task_offset_ms: (recordingStartPerf && sessionStartPerf) ? Number((sessionStartPerf - recordingStartPerf).toFixed(2)) : null,
+      targets_order: targetOrder.map(id => { const t = targets.find(v => v.id === id); return { id: t.id, x: Number(t.x.toFixed(2)), y: Number(t.y.toFixed(2)) }; }),
+      trials, session_mouse_track: sessionTrack, photo_snapshots_metadata: photoSnapshots
+    };
+  }
+
+  async function finishSession(auto) {
+    if (sessionStartPerf === null) { setStatus('未开始任务'); return; }
+    if (!auto && trials.length === 0) { setStatus('未命中目标，不能导出'); return; }
+    running = false;
+    setStatus(`导出中...`);
+    await stopRecordingIfNeeded();
+    const completed = auto || activeIndex >= targetOrder.length;
+    const exportData = exportDataObject(completed);
+    let success = false;
+    if (videoBlob && videoBlob.size > 0) success = await saveWithAutoFolders(exportData, videoBlob, recordingMimeType);
+    else success = await saveWithAutoFolders(exportData, null, null);
+    if (!success) fallbackDownload(exportData, videoBlob, recordingMimeType);
+    setStatus(`任务结束 | 命中 ${trials.length}/${targetOrder.length} 个目标`);
+  }
+
+  async function resetAll() {
+    running = false; currentTrial = null; trials = []; sessionTrack = []; sessionStartPerf = null; sessionStartIso = null;
+    lastPoint = null; activeIndex = -1; photoSnapshots = [];
+    clearAllTargets();
+    await stopRecordingIfNeeded();
+    recordedChunks = []; videoBlob = null; recordingStartPerf = null; recordingStopPerf = null;
+    setStatus('重置完成');
+    if (cameraReady && mediaStream?.active) setCameraMeta('摄像头待命', 'live');
+    else setCameraMeta('未连接摄像头', 'idle');
+  }
+
+  conditionEl.addEventListener('change', applyConditionDefaults);
+  connectCameraBtn.addEventListener('click', ensureCameraConnected);
+  snapshotBtn.addEventListener('click', captureAndSavePhoto);
+  previewBtn.addEventListener('click', previewTargets);
+  startBtn.addEventListener('click', startTask);
+  finishBtn.addEventListener('click', () => finishSession(false));
+  resetBtn.addEventListener('click', resetAll);
+  applyConditionDefaults();
+  resetAll();
+  loadStoredRootDirectory(); // 尝试加载之前保存的根目录句柄
+</script>
+</body>
+</html>

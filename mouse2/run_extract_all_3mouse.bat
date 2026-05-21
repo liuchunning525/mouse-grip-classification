@@ -25,7 +25,10 @@ for /r "data\raw" %%f in (*_webcam.mp4) do (
 
     if not exist "!out_dir!" mkdir "!out_dir!"
 
-    set "task_log=!raw_full!!name:_webcam=_task_log!.json"
+    set "task_log="
+    for %%j in ("%%~dpf*_task_log.json") do (
+         set "task_log=%%~fj"
+    )
     set "output=!out_dir!!name:_webcam=_frame_features!.json"
     set "preview=!out_dir!!name:_webcam=_preview!.mp4"
 

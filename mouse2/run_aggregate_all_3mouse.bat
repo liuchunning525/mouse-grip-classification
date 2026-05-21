@@ -21,7 +21,10 @@ for /r "data\outputs" %%f in (*_frame_features.json) do (
     set "raw_dir=data\raw\!rel_dir!"
 
     set "base=!name:_frame_features=!"
-    set "task_log=!raw_dir!!base!_task_log.json"
+    set "task_log="
+    for %%j in ("!raw_dir!\*_task_log.json") do (
+        set "task_log=%%~fj"
+    )
     set "output=!out_full!!base!_trial_features_v2.json"
 
     echo Task log: !task_log!
