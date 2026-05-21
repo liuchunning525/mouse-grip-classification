@@ -1,0 +1,41 @@
+{
+  "pose_type": "aruco_single_marker",
+  "source_image": "ref.jpg",
+  "aruco_dictionary": "DICT_4X4_50",
+  "aruco_id": 0,
+  "center_x": 1323.75,
+  "center_y": 1068.0,
+  "major_axis_x": 0.05078185349702835,
+  "major_axis_y": -0.9987097978591919,
+  "minor_axis_x": 0.9987097978591919,
+  "minor_axis_y": 0.05078185349702835,
+  "angle_deg": -87.08916217383225,
+  "marker_side_px": 64.87704467773438,
+  "marker_size_mm": null,
+  "mm_per_pixel_marker": null,
+  "real_length_mm": null,
+  "real_width_mm": null,
+  "mouse_length_px": 259.5081787109375,
+  "mouse_width_px": 129.75408935546875,
+  "mm_per_pixel_length": null,
+  "mm_per_pixel_width": null,
+  "aruco_corners": [
+    [
+      1287.0,
+      1096.0
+    ],
+    [
+      1290.0,
+      1037.0
+    ],
+    [
+      1362.0,
+      1040.0
+    ],
+    [
+      1356.0,
+      1099.0
+    ]
+  ],
+  "note": "Single ArUco pilot ref. Origin is marker center, not physical mouse center unless offset calibration is added."
+}
