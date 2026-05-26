@@ -273,11 +273,13 @@ Large raw video datasets are not included in this repository.
 
 Recommended exclusions for GitHub:
 
+```text
 /data/raw/
 /data/outputs/
 /test/raw/
 /test/outputs/
 /models/trained/
+```
 
 In addition, training_dataset_3mouse_20users.json is not uploaded because the file size is too large for the repository.
 
