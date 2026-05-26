@@ -140,8 +140,10 @@ Palm + Fingertip hybrid is treated as unreliable and converted to the dominant c
 G102
 
 G102 is used only for:
-* Free-grip recording
-* Natural grip tendency estimation
+
+- Free-grip recording
+- Natural grip tendency estimation
+
 It is NOT used as a recommendation target.
 
 ## Recommendation Candidates
@@ -209,21 +211,28 @@ using the same task condition.
 
 A recommendation is considered successful when the recommended mouse achieves the best performance score among candidate mice.
 
+## Recommendation Performance Improvement
+
+Among users with successful recommendations,
+the recommended mouse improved task performance by an average of 16.61% compared to non-recommended mice.
+
 ---
 
 # Current Research Pipeline
 
+```text
 Data Collection
-↓
+    ↓
 Feature Extraction
-↓
+    ↓
 Model Training
-↓
+    ↓
 Grip Tendency Prediction
-↓
+    ↓
 Mouse Recommendation
-↓
+    ↓
 Recommendation Validation
+```
 
 ---
 
@@ -302,8 +311,8 @@ In addition, training_dataset_3mouse_20users.json is not uploaded because the fi
 * Hanlin Wang
 
 
-* Professor：이병주
-* Assistant：이한별
+* Professor:이병주
+* Assistant:이한별
 
 
 Yonsei University
