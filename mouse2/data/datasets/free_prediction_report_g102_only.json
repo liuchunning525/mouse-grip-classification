@@ -1,0 +1,4220 @@
+{
+  "meta": {
+    "input_root": "test\\outputs",
+    "baseline_mouse": "G102",
+    "model": "models\\trained\\grip_model_3mouse.pkl",
+    "feature_columns_count": 888,
+    "label_names": [
+      "claw",
+      "fingertip",
+      "palm"
+    ],
+    "n_files": 20,
+    "include_unstable": false,
+    "max_peak_speed": null,
+    "hybrid_gap": 0.2,
+    "min_second": 0.25,
+    "note": "Free grip is evaluated as tendency distribution, not single-label accuracy."
+  },
+  "file_results": [
+    {
+      "source_file": "test\\outputs\\user_001_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_001",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 1,
+        "fingertip": 12
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.9230769230769231,
+        "palm": 0.07692307692307693
+      },
+      "mean_probability": {
+        "claw": 0.23454677583867709,
+        "fingertip": 0.5962171912822671,
+        "palm": 0.16923603287905584
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.15688189168459699,
+            "fingertip": 0.3950358076060601,
+            "palm": 0.44808230070934296
+          },
+          "mouse_peak_speed": 189.67560140239726,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 12,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.23006006332522516,
+            "fingertip": 0.6419107343384369,
+            "palm": 0.1280292023363375
+          },
+          "mouse_peak_speed": 350.1708567346089,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 3,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3345980140990556,
+            "fingertip": 0.5441136436115397,
+            "palm": 0.12128834228940448
+          },
+          "mouse_peak_speed": 287.34954776181064,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 9,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.26425246353640913,
+            "fingertip": 0.5514650961002057,
+            "palm": 0.18428244036338515
+          },
+          "mouse_peak_speed": 309.9143669785153,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 2,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.22521313186530917,
+            "fingertip": 0.6711053734855852,
+            "palm": 0.10368149464910553
+          },
+          "mouse_peak_speed": 180.33871839727732,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 10,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.18720899125071833,
+            "fingertip": 0.6984379703639969,
+            "palm": 0.1143530383852846
+          },
+          "mouse_peak_speed": 115.23133481375274,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 0,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2140248873563338,
+            "fingertip": 0.6813970524358336,
+            "palm": 0.10457806020783256
+          },
+          "mouse_peak_speed": 114.08510089284641,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 7,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.20551432649387413,
+            "fingertip": 0.5808275999667442,
+            "palm": 0.2136580735393817
+          },
+          "mouse_peak_speed": 90.46463484944123,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 1,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.23455831968603866,
+            "fingertip": 0.6326989398092081,
+            "palm": 0.13274274050475324
+          },
+          "mouse_peak_speed": 251.53726098192814,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 11,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2582864153769268,
+            "fingertip": 0.6453230079734069,
+            "palm": 0.09639057664966617
+          },
+          "mouse_peak_speed": 180.9638111499171,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 6,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.19326192061033962,
+            "fingertip": 0.6963375899444153,
+            "palm": 0.11040048944524489
+          },
+          "mouse_peak_speed": 261.3152959925067,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 4,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2589556862710638,
+            "fingertip": 0.5446360224251995,
+            "palm": 0.19640829130373666
+          },
+          "mouse_peak_speed": 132.0350282762313,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 8,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2862919743469105,
+            "fingertip": 0.4675346486088393,
+            "palm": 0.2461733770442502
+          },
+          "mouse_peak_speed": 187.95120031268644,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_002_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_002",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0022785496817870985,
+        "fingertip": 0.0011480776441406362,
+        "palm": 0.9965733726740722
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0016516685414323209,
+            "palm": 0.9983483314585677
+          },
+          "mouse_peak_speed": 182.45900057920164,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 318.11364174222393,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 204.04276575047214,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0017120093276331131,
+            "fingertip": 0.0,
+            "palm": 0.998287990672367
+          },
+          "mouse_peak_speed": 444.13169509618484,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 255.21393856499293,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 337.3522038212507,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0033333333333333335,
+            "fingertip": 0.0016516685414323209,
+            "palm": 0.9950149981252343
+          },
+          "mouse_peak_speed": 298.43552837600157,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 285.00159127534437,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 243.70325051551754,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 258.8620813188217,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.011242469868932499,
+            "fingertip": 0.004985001874765654,
+            "palm": 0.9837725282563019
+          },
+          "mouse_peak_speed": 295.6606307124217,
+          "marker_ok_ratio": 0.9,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006666666666666667,
+            "fingertip": 0.0,
+            "palm": 0.9933333333333333
+          },
+          "mouse_peak_speed": 279.6716204553325,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006666666666666667,
+            "fingertip": 0.006636670416197974,
+            "palm": 0.9866966629171353
+          },
+          "mouse_peak_speed": 402.28548444533584,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_003_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_003",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.06531417071004902,
+        "fingertip": 0.13695916062416982,
+        "palm": 0.7977266686657812
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.008484344672465558,
+            "fingertip": 0.024080144315946315,
+            "palm": 0.967435511011588
+          },
+          "mouse_peak_speed": 238.84830200240643,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.010912226607796713,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.9857544400588699
+          },
+          "mouse_peak_speed": 243.17953187351566,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.02250600334119965,
+            "fingertip": 0.08789262459385348,
+            "palm": 0.889601372064947
+          },
+          "mouse_peak_speed": 378.0484096559629,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.18933165395130133,
+            "fingertip": 0.32249821269290363,
+            "palm": 0.48817013335579496
+          },
+          "mouse_peak_speed": 288.0862695330872,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16292066461771784,
+            "fingertip": 0.2562274874148809,
+            "palm": 0.5808518479674012
+          },
+          "mouse_peak_speed": 147.25142998126452,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0033333333333333335,
+            "fingertip": 0.004985001874765654,
+            "palm": 0.991681664791901
+          },
+          "mouse_peak_speed": 414.2753110112934,
+          "marker_ok_ratio": 0.9,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0208387564005821,
+            "fingertip": 0.04174446675535829,
+            "palm": 0.9374167768440597
+          },
+          "mouse_peak_speed": 376.00547802227385,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.049532167020617225,
+            "fingertip": 0.1604168580342426,
+            "palm": 0.7900509749451401
+          },
+          "mouse_peak_speed": 345.3344952773647,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0676392267588203,
+            "fingertip": 0.19455259486636456,
+            "palm": 0.737808178374815
+          },
+          "mouse_peak_speed": 261.9917097026543,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.008230623488413713,
+            "fingertip": 0.016841718030214555,
+            "palm": 0.9749276584813718
+          },
+          "mouse_peak_speed": 224.65371693947603,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16172105956857755,
+            "fingertip": 0.21803687570138885,
+            "palm": 0.6202420647300335
+          },
+          "mouse_peak_speed": 287.9377767249482,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.013815231784276488,
+            "fingertip": 0.04911047408267696,
+            "palm": 0.9370742941330467
+          },
+          "mouse_peak_speed": 259.4402150976317,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12981892768553543,
+            "fingertip": 0.4007492964182784,
+            "palm": 0.46943177589618607
+          },
+          "mouse_peak_speed": 246.38112203456527,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_004_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_004",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 1,
+      "n_trials_skipped": 12,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.11130262097497798,
+        "fingertip": 0.21026335070528887,
+        "palm": 0.6784340283197332
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 4,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.11130262097497798,
+            "fingertip": 0.21026335070528887,
+            "palm": 0.6784340283197332
+          },
+          "mouse_peak_speed": 253.02201413656906,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_005_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_005",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 12,
+      "n_trials_skipped": 1,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 9,
+        "claw": 3
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.25,
+        "fingertip": 0.0,
+        "palm": 0.75
+      },
+      "mean_probability": {
+        "claw": 0.2818588096011627,
+        "fingertip": 0.2291023610837438,
+        "palm": 0.4890388293150934
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.054965204030615986,
+            "fingertip": 0.060339611144866974,
+            "palm": 0.8846951848245171
+          },
+          "mouse_peak_speed": 310.00033324428904,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.28696817874952074,
+            "fingertip": 0.12404304600409845,
+            "palm": 0.5889887752463808
+          },
+          "mouse_peak_speed": 465.4363739267577,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1948551477736596,
+            "fingertip": 0.2615087576981487,
+            "palm": 0.5436360945281916
+          },
+          "mouse_peak_speed": 247.9159749683947,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.07512040471108036,
+            "fingertip": 0.1969991264821647,
+            "palm": 0.7278804688067548
+          },
+          "mouse_peak_speed": 263.1184180916611,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.3263135892285984,
+            "fingertip": 0.220848650523504,
+            "palm": 0.45283776024789757
+          },
+          "mouse_peak_speed": 253.4484387624258,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.3260138077539389,
+            "fingertip": 0.2991836414563923,
+            "palm": 0.3748025507896688
+          },
+          "mouse_peak_speed": 375.9567665366694,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.10930036055425867,
+            "fingertip": 0.3120431644965383,
+            "palm": 0.5786564749492031
+          },
+          "mouse_peak_speed": 315.09011441951907,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.23289462728041524,
+            "fingertip": 0.3087695757114938,
+            "palm": 0.4583357970080908
+          },
+          "mouse_peak_speed": 380.48270536288317,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.25266724026269655,
+            "fingertip": 0.28438667771367426,
+            "palm": 0.46294608202362914
+          },
+          "mouse_peak_speed": 312.2047101421923,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 6,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.480891687782333,
+            "fingertip": 0.2512498407996268,
+            "palm": 0.26785847141804014
+          },
+          "mouse_peak_speed": 271.6969789597722,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 0,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.3512314396358718,
+            "fingertip": 0.30328452965972474,
+            "palm": 0.3454840307044035
+          },
+          "mouse_peak_speed": 143.63106492851745,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 5,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.6910840274509633,
+            "fingertip": 0.1265717113146925,
+            "palm": 0.182344261234344
+          },
+          "mouse_peak_speed": 94.76688820025895,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_006_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_006",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.05688329065139452,
+        "fingertip": 0.06785234316255284,
+        "palm": 0.8752643661860527
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.13509226828609083,
+            "fingertip": 0.06587050482891674,
+            "palm": 0.7990372268849925
+          },
+          "mouse_peak_speed": 167.51897954245197,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.015138999962140647,
+            "fingertip": 0.012709795787257729,
+            "palm": 0.9721512042506016
+          },
+          "mouse_peak_speed": 386.54115240165567,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1306182572967042,
+            "fingertip": 0.1357669894846127,
+            "palm": 0.7336147532186832
+          },
+          "mouse_peak_speed": 364.9615583878128,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.07821434559116382,
+            "fingertip": 0.03026945385328202,
+            "palm": 0.891516200555554
+          },
+          "mouse_peak_speed": 450.4726697386585,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.013413949138089609,
+            "fingertip": 0.024955005624296964,
+            "palm": 0.9616310452376133
+          },
+          "mouse_peak_speed": 272.36660878783,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.06160670058668028,
+            "fingertip": 0.17558988010361962,
+            "palm": 0.7628034193097002
+          },
+          "mouse_peak_speed": 288.44585279708053,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.06051984386447679,
+            "fingertip": 0.035385966644941265,
+            "palm": 0.904094189490582
+          },
+          "mouse_peak_speed": 370.37087733359857,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.019900352579752555,
+            "fingertip": 0.033271104660648344,
+            "palm": 0.946828542759599
+          },
+          "mouse_peak_speed": 463.11499887043715,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1630509301328122,
+            "fingertip": 0.17353066002051193,
+            "palm": 0.6634184098466759
+          },
+          "mouse_peak_speed": 361.9449614577522,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.04554863317838584,
+            "fingertip": 0.12756724403577308,
+            "palm": 0.8268841227858411
+          },
+          "mouse_peak_speed": 248.8513952151167,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006197127207966054,
+            "fingertip": 0.027193852319795115,
+            "palm": 0.9666090204722388
+          },
+          "mouse_peak_speed": 326.3531027219597,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.00513602798289934,
+            "fingertip": 0.03666666666666667,
+            "palm": 0.9581973053504339
+          },
+          "mouse_peak_speed": 281.9647712594695,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.005045342660966446,
+            "fingertip": 0.0033033370828646417,
+            "palm": 0.991651320256169
+          },
+          "mouse_peak_speed": 173.73579174254328,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_007_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_007",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 3,
+      "n_trials_skipped": 10,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 3
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0944120626105932,
+        "fingertip": 0.15928423439027534,
+        "palm": 0.7463037029991314
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.09633001254936968,
+            "fingertip": 0.12331114526839403,
+            "palm": 0.7803588421822363
+          },
+          "mouse_peak_speed": 195.44120759195076,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.06824311760547994,
+            "fingertip": 0.1345914680136495,
+            "palm": 0.7971654143808706
+          },
+          "mouse_peak_speed": 109.45597022676537,
+          "marker_ok_ratio": 0.7777777777777778,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.11866305767693007,
+            "fingertip": 0.21995008988878254,
+            "palm": 0.6613868524342875
+          },
+          "mouse_peak_speed": 139.5089546672614,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_008_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_008",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.06402653569266144,
+        "fingertip": 0.06442100060288963,
+        "palm": 0.8715524637044489
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.055256680017298006,
+            "fingertip": 0.024834353589898297,
+            "palm": 0.9199089663928038
+          },
+          "mouse_peak_speed": 142.75489660068484,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.20039863071497943,
+            "fingertip": 0.10995143981382237,
+            "palm": 0.6896499294711983
+          },
+          "mouse_peak_speed": 187.74798928144176,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12125447198754179,
+            "fingertip": 0.12513762505114268,
+            "palm": 0.7536079029613156
+          },
+          "mouse_peak_speed": 202.8892433403933,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 204.92527197818782,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.03180269464956601,
+            "fingertip": 0.018318335208098988,
+            "palm": 0.9498789701423351
+          },
+          "mouse_peak_speed": 176.10406315309075,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.01,
+            "fingertip": 0.0,
+            "palm": 0.99
+          },
+          "mouse_peak_speed": 208.22956522407853,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.005866883946830267,
+            "fingertip": 0.0016516685414323209,
+            "palm": 0.9924814475117374
+          },
+          "mouse_peak_speed": 235.82486235979903,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006666666666666667,
+            "fingertip": 0.0,
+            "palm": 0.9933333333333333
+          },
+          "mouse_peak_speed": 291.14061761513585,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0033333333333333335,
+            "fingertip": 0.0,
+            "palm": 0.9966666666666667
+          },
+          "mouse_peak_speed": 227.85604232268395,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12874686584322112,
+            "fingertip": 0.22089846389250947,
+            "palm": 0.6503546702642694
+          },
+          "mouse_peak_speed": 200.71677806636635,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.08375324125838617,
+            "fingertip": 0.13566545721490017,
+            "palm": 0.7805813015267137
+          },
+          "mouse_peak_speed": 185.1028564660381,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1336920411568219,
+            "fingertip": 0.160593799265535,
+            "palm": 0.7057141595776432
+          },
+          "mouse_peak_speed": 184.70068280080955,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.051573454429954084,
+            "fingertip": 0.04042186526022607,
+            "palm": 0.90800468030982
+          },
+          "mouse_peak_speed": 168.5411903995809,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_009_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_009",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 8,
+        "claw": 4,
+        "fingertip": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.3076923076923077,
+        "fingertip": 0.07692307692307693,
+        "palm": 0.6153846153846154
+      },
+      "mean_probability": {
+        "claw": 0.3481208700536449,
+        "fingertip": 0.2589144730032105,
+        "palm": 0.39296465694314453
+      },
+      "tendency": {
+        "type": "hybrid",
+        "main": "palm",
+        "secondary": "claw",
+        "description": "palm + claw"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm + claw hybrid tendency. Since palm is the stronger tendency, recommend the mouse for palm."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.220771762716046,
+            "fingertip": 0.176471635533707,
+            "palm": 0.6027566017502468
+          },
+          "mouse_peak_speed": 373.7461687980966,
+          "marker_ok_ratio": 0.9333333333333333,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.26894247662222004,
+            "fingertip": 0.14864620484827296,
+            "palm": 0.5824113185295071
+          },
+          "mouse_peak_speed": 346.0842567733167,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.18364348080011436,
+            "fingertip": 0.17475007053108177,
+            "palm": 0.6416064486688039
+          },
+          "mouse_peak_speed": 310.36107729465766,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2321151905896229,
+            "fingertip": 0.16776934754478387,
+            "palm": 0.6001154618655933
+          },
+          "mouse_peak_speed": 258.41404588250106,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 7,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.40324357050807985,
+            "fingertip": 0.35480009826969816,
+            "palm": 0.2419563312222221
+          },
+          "mouse_peak_speed": 246.42360393401069,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 3,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.41825057854689895,
+            "fingertip": 0.2951825921004019,
+            "palm": 0.28656682935269917
+          },
+          "mouse_peak_speed": 236.22890563424713,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.37589337848604043,
+            "fingertip": 0.1950244000709227,
+            "palm": 0.4290822214430369
+          },
+          "mouse_peak_speed": 311.39744385565695,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 6,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3611246404820649,
+            "fingertip": 0.38462381932174755,
+            "palm": 0.2542515401961876
+          },
+          "mouse_peak_speed": 292.77891296741984,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2835702513220779,
+            "fingertip": 0.3532088267042196,
+            "palm": 0.3632209219737024
+          },
+          "mouse_peak_speed": 202.285073083047,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.41695236630020494,
+            "fingertip": 0.1434661320384233,
+            "palm": 0.43958150166137194
+          },
+          "mouse_peak_speed": 443.3663938175234,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2874632399042924,
+            "fingertip": 0.2176826665379757,
+            "palm": 0.49485409355773186
+          },
+          "mouse_peak_speed": 200.86564709689395,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 9,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.5056450904076879,
+            "fingertip": 0.4104223316743453,
+            "palm": 0.0839325779179668
+          },
+          "mouse_peak_speed": 200.73332452186344,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 1,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.5679552840120331,
+            "fingertip": 0.3438400238661566,
+            "palm": 0.08820469212181017
+          },
+          "mouse_peak_speed": 311.10444414111726,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_010_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_010",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0072970743728800885,
+        "fingertip": 0.00707586017523231,
+        "palm": 0.9856270654518876
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0,
+            "palm": 1.0
+          },
+          "mouse_peak_speed": 321.4791829282676,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.009366852770210852,
+            "fingertip": 0.01911549184223032,
+            "palm": 0.9715176553875587
+          },
+          "mouse_peak_speed": 268.5523589499753,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.018046056571588,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.9786206100950786
+          },
+          "mouse_peak_speed": 263.31130419210325,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.008318335208098987,
+            "palm": 0.991681664791901
+          },
+          "mouse_peak_speed": 355.6576354514369,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.005045342660966446,
+            "fingertip": 0.01220885044502946,
+            "palm": 0.982745806894004
+          },
+          "mouse_peak_speed": 333.3740209542762,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.021729282158931926,
+            "fingertip": 0.0049396739828006676,
+            "palm": 0.9733310438582673
+          },
+          "mouse_peak_speed": 278.1237143972981,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.01440679155064259,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.982259875116024
+          },
+          "mouse_peak_speed": 351.75534834143684,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.005913151959626809,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.9907535147070399
+          },
+          "mouse_peak_speed": 329.02994975066616,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.004431152647975078,
+            "palm": 0.9955688473520248
+          },
+          "mouse_peak_speed": 348.12900454410243,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.007370868194238493,
+            "fingertip": 0.021321009610453214,
+            "palm": 0.9713081221953083
+          },
+          "mouse_peak_speed": 362.28833056989316,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.007388123056812718,
+            "fingertip": 0.0016516685414323209,
+            "palm": 0.990960208401755
+          },
+          "mouse_peak_speed": 245.13633747085635,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0022621645910899987,
+            "fingertip": 0.01,
+            "palm": 0.9877378354089099
+          },
+          "mouse_peak_speed": 353.06336486838785,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0033333333333333335,
+            "fingertip": 0.0,
+            "palm": 0.9966666666666667
+          },
+          "mouse_peak_speed": 168.317246770571,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_011_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_011",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.003254184011513519,
+        "fingertip": 0.037680529419289954,
+        "palm": 0.9590652865691965
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.01994702448556326,
+            "palm": 0.979177465557254
+          },
+          "mouse_peak_speed": 117.41351092895799,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0025875192848157655,
+            "fingertip": 0.004962022610797606,
+            "palm": 0.9924504581043866
+          },
+          "mouse_peak_speed": 122.47014814965692,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.02624651747905016,
+            "fingertip": 0.04826535969366225,
+            "palm": 0.9254881228272877
+          },
+          "mouse_peak_speed": 56.180396799860304,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.043280357818896595,
+            "palm": 0.9558441322239207
+          },
+          "mouse_peak_speed": 111.13075753072435,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.004208843290515985,
+            "fingertip": 0.06047421013869171,
+            "palm": 0.9353169465707922
+          },
+          "mouse_peak_speed": 91.55584067702367,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.03162868927746427,
+            "palm": 0.967495800765353
+          },
+          "mouse_peak_speed": 134.971937748744,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.0632503615684279,
+            "palm": 0.9358741284743894
+          },
+          "mouse_peak_speed": 139.37030762491082,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.05548920826392605,
+            "palm": 0.9436352817788912
+          },
+          "mouse_peak_speed": 106.57082490166624,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.02661369115222993,
+            "palm": 0.9725107988905873
+          },
+          "mouse_peak_speed": 64.4845154803959,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.038265359693662244,
+            "palm": 0.960859130349155
+          },
+          "mouse_peak_speed": 115.40522256308304,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.00225743243783263,
+            "fingertip": 0.0794052380537852,
+            "palm": 0.9183373295083821
+          },
+          "mouse_peak_speed": 65.94717940074563,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.000875509957182652,
+            "fingertip": 0.014932026360328914,
+            "palm": 0.9841924636824884
+          },
+          "mouse_peak_speed": 85.20760440627083,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.9966666666666667
+          },
+          "mouse_peak_speed": 56.51558075706623,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_012_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_012",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 9,
+      "n_trials_skipped": 4,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "claw": 1,
+        "palm": 8
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.1111111111111111,
+        "fingertip": 0.0,
+        "palm": 0.8888888888888888
+      },
+      "mean_probability": {
+        "claw": 0.06296330439747978,
+        "fingertip": 0.06106438084094698,
+        "palm": 0.8759723147615733
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 3,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.4725148984384966,
+            "fingertip": 0.190944740044643,
+            "palm": 0.3365403615168603
+          },
+          "mouse_peak_speed": 193.79448486506485,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.00220885044502946,
+            "palm": 0.9977911495549705
+          },
+          "mouse_peak_speed": 349.5792881026565,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.018271439234583707,
+            "fingertip": 0.028871288992683805,
+            "palm": 0.9528572717727326
+          },
+          "mouse_peak_speed": 314.4470593359079,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0033333333333333335,
+            "fingertip": 0.0033333333333333335,
+            "palm": 0.9933333333333333
+          },
+          "mouse_peak_speed": 284.91915420703555,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.01877197552517644,
+            "fingertip": 0.04871991338942401,
+            "palm": 0.9325081110853997
+          },
+          "mouse_peak_speed": 280.03186734821617,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.008312994082784426,
+            "fingertip": 0.014436493773289639,
+            "palm": 0.9772505121439258
+          },
+          "mouse_peak_speed": 350.1761165386023,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.008506103238492978,
+            "fingertip": 0.08586751382504995,
+            "palm": 0.9056263829364573
+          },
+          "mouse_peak_speed": 190.61765625963127,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.010614902134605359,
+            "fingertip": 0.04946205276543619,
+            "palm": 0.9399230450999585
+          },
+          "mouse_peak_speed": 392.22761525693073,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.02634409358984529,
+            "fingertip": 0.1257352409996334,
+            "palm": 0.8479206654105214
+          },
+          "mouse_peak_speed": 323.02354260013124,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_013_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_013",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 12,
+        "claw": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.07692307692307693,
+        "fingertip": 0.0,
+        "palm": 0.9230769230769231
+      },
+      "mean_probability": {
+        "claw": 0.25680569136644193,
+        "fingertip": 0.07691637867056786,
+        "palm": 0.6662779299629902
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.14925092639714538,
+            "fingertip": 0.047711531621644876,
+            "palm": 0.8030375419812098
+          },
+          "mouse_peak_speed": 253.3798891648556,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2432350226956225,
+            "fingertip": 0.08312545866724735,
+            "palm": 0.6736395186371301
+          },
+          "mouse_peak_speed": 476.0417983049173,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2504376792381423,
+            "fingertip": 0.06133071776924857,
+            "palm": 0.6882316029926092
+          },
+          "mouse_peak_speed": 230.69508362045383,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.07699215133428337,
+            "fingertip": 0.09377100339492916,
+            "palm": 0.8292368452707876
+          },
+          "mouse_peak_speed": 276.30901887022014,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 8,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.49166780249552905,
+            "fingertip": 0.058570817206201296,
+            "palm": 0.4497613802982697
+          },
+          "mouse_peak_speed": 349.13135688288645,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.347986917630937,
+            "fingertip": 0.09562535727316011,
+            "palm": 0.5563877250959028
+          },
+          "mouse_peak_speed": 341.1164190595944,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.18972706049474525,
+            "fingertip": 0.0795009608276687,
+            "palm": 0.730771978677586
+          },
+          "mouse_peak_speed": 271.60880926951353,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.243996674653086,
+            "fingertip": 0.06527720693806237,
+            "palm": 0.6907261184088515
+          },
+          "mouse_peak_speed": 236.55753448195517,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2520636814601028,
+            "fingertip": 0.1021066924080517,
+            "palm": 0.6458296261318455
+          },
+          "mouse_peak_speed": 217.4830632703602,
+          "marker_ok_ratio": 0.8571428571428571,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.24503254632563948,
+            "fingertip": 0.06958438116512027,
+            "palm": 0.6853830725092401
+          },
+          "mouse_peak_speed": 289.12958016678925,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.24654453563268003,
+            "fingertip": 0.074546667914667,
+            "palm": 0.6789087964526531
+          },
+          "mouse_peak_speed": 385.63829787234044,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.42806553389271246,
+            "fingertip": 0.08991298903609027,
+            "palm": 0.48202147707119725
+          },
+          "mouse_peak_speed": 284.7325819324935,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1734734555131191,
+            "fingertip": 0.0788491384952905,
+            "palm": 0.7476774059915905
+          },
+          "mouse_peak_speed": 300.614279807336,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_014_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_014",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.017075656272007363,
+        "fingertip": 0.016194108651670286,
+        "palm": 0.9667302350763224
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0017120093276331131,
+            "fingertip": 0.0,
+            "palm": 0.998287990672367
+          },
+          "mouse_peak_speed": 301.6035513839543,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006848037310532453,
+            "fingertip": 0.004697551010001211,
+            "palm": 0.9884544116794662
+          },
+          "mouse_peak_speed": 420.9386524333754,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.005045342660966446,
+            "fingertip": 0.00633432265294076,
+            "palm": 0.9886203346860928
+          },
+          "mouse_peak_speed": 293.72348131650404,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.01717728112630174,
+            "fingertip": 0.04571723514191068,
+            "palm": 0.9371054837317878
+          },
+          "mouse_peak_speed": 341.939508205415,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.013424018655266226,
+            "fingertip": 0.03743358710815912,
+            "palm": 0.9491423942365745
+          },
+          "mouse_peak_speed": 266.7374206110889,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0017120093276331131,
+            "fingertip": 0.0,
+            "palm": 0.998287990672367
+          },
+          "mouse_peak_speed": 324.6714394308697,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.05241643963375679,
+            "fingertip": 0.025466859635929116,
+            "palm": 0.9221167007303145
+          },
+          "mouse_peak_speed": 345.24611289951144,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.02570116660258911,
+            "fingertip": 0.04262311496043339,
+            "palm": 0.9316757184369775
+          },
+          "mouse_peak_speed": 254.12423412254626,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.01701933843722162,
+            "fingertip": 0.004985001874765654,
+            "palm": 0.9779956596880129
+          },
+          "mouse_peak_speed": 352.61935578819003,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.016287812529898946,
+            "fingertip": 0.01248870056497175,
+            "palm": 0.9712234869051294
+          },
+          "mouse_peak_speed": 441.0545157603266,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.012954479196565612,
+            "fingertip": 0.011651668541432321,
+            "palm": 0.975393852262002
+          },
+          "mouse_peak_speed": 425.7513294560994,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.037530052165141686,
+            "fingertip": 0.008318335208098987,
+            "palm": 0.9541516126267595
+          },
+          "mouse_peak_speed": 375.03772256321787,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.014155544562588898,
+            "fingertip": 0.010807035773070739,
+            "palm": 0.9750374196643404
+          },
+          "mouse_peak_speed": 226.6527675714321,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_015_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_015",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 11,
+      "n_trials_skipped": 2,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "fingertip": 6,
+        "palm": 1,
+        "claw": 4
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.36363636363636365,
+        "fingertip": 0.5454545454545454,
+        "palm": 0.09090909090909091
+      },
+      "mean_probability": {
+        "claw": 0.2937318654744682,
+        "fingertip": 0.5331268101013901,
+        "palm": 0.17314132442414168
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 1,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.19259271997477645,
+            "fingertip": 0.7559242180187072,
+            "palm": 0.05148306200651611
+          },
+          "mouse_peak_speed": 253.2830632825138,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 12,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.13093242671818484,
+            "fingertip": 0.769746249304613,
+            "palm": 0.09932132397720236
+          },
+          "mouse_peak_speed": 316.52129955241315,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 2,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.1272240128358012,
+            "fingertip": 0.6442089011167244,
+            "palm": 0.22856708604747458
+          },
+          "mouse_peak_speed": 400.930289718847,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.21739897585208046,
+            "fingertip": 0.35308172509945246,
+            "palm": 0.4295192990484668
+          },
+          "mouse_peak_speed": 282.7657478974096,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 9,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.4497132198238024,
+            "fingertip": 0.4019258808465887,
+            "palm": 0.1483608993296089
+          },
+          "mouse_peak_speed": 463.2084296284408,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 5,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.6892190320722938,
+            "fingertip": 0.2751477907026715,
+            "palm": 0.0356331772250346
+          },
+          "mouse_peak_speed": 451.5137262259191,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 0,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.12182949423607103,
+            "fingertip": 0.6814462342153462,
+            "palm": 0.1967242715485827
+          },
+          "mouse_peak_speed": 277.7219731300066,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 7,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.23688170108820364,
+            "fingertip": 0.5875622095508212,
+            "palm": 0.17555608936097516
+          },
+          "mouse_peak_speed": 351.00872815166656,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 11,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.22940807630060328,
+            "fingertip": 0.6603791147083042,
+            "palm": 0.11021280899109243
+          },
+          "mouse_peak_speed": 505.97537522335017,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 3,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.3612544872212278,
+            "fingertip": 0.3035271855553113,
+            "palm": 0.3352183272234609
+          },
+          "mouse_peak_speed": 490.3684945989806,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 8,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.4745963740961053,
+            "fingertip": 0.43144540199675047,
+            "palm": 0.093958223907144
+          },
+          "mouse_peak_speed": 389.33005883001476,
+          "marker_ok_ratio": 0.9,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_016_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_016",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 12,
+      "n_trials_skipped": 1,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "claw": 6,
+        "palm": 6
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.5,
+        "fingertip": 0.0,
+        "palm": 0.5
+      },
+      "mean_probability": {
+        "claw": 0.37457674308828404,
+        "fingertip": 0.23234759412966147,
+        "palm": 0.3930756627820545
+      },
+      "tendency": {
+        "type": "hybrid",
+        "main": "palm",
+        "secondary": "claw",
+        "description": "palm + claw"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm + claw hybrid tendency. Since palm is the stronger tendency, recommend the mouse for palm."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 11,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.4950421714770431,
+            "fingertip": 0.17377727058326037,
+            "palm": 0.33118055793969664
+          },
+          "mouse_peak_speed": 186.42996176141082,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 8,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.5289661585565582,
+            "fingertip": 0.1727846310321829,
+            "palm": 0.29824921041125896
+          },
+          "mouse_peak_speed": 276.89476950146434,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 5,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.49120867877853686,
+            "fingertip": 0.19104920400481135,
+            "palm": 0.3177421172166518
+          },
+          "mouse_peak_speed": 322.42379699335896,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 9,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.38125690078324487,
+            "fingertip": 0.24099869472921753,
+            "palm": 0.3777444044875376
+          },
+          "mouse_peak_speed": 336.7540192351885,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 12,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.42161818064977163,
+            "fingertip": 0.25454784489827725,
+            "palm": 0.3238339744519512
+          },
+          "mouse_peak_speed": 202.6189326933253,
+          "marker_ok_ratio": 0.875,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2961928053432511,
+            "fingertip": 0.2641371029760189,
+            "palm": 0.4396700916807299
+          },
+          "mouse_peak_speed": 307.78782331994194,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.30666735034044507,
+            "fingertip": 0.255264960949182,
+            "palm": 0.4380676887103727
+          },
+          "mouse_peak_speed": 325.6891266257074,
+          "marker_ok_ratio": 0.8,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 2,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.41356982507707274,
+            "fingertip": 0.2751485036375253,
+            "palm": 0.31128167128540213
+          },
+          "mouse_peak_speed": 300.19157440208454,
+          "marker_ok_ratio": 0.8888888888888888,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.3083889754683435,
+            "fingertip": 0.23176949408031278,
+            "palm": 0.4598415304513437
+          },
+          "mouse_peak_speed": 298.05927175228453,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.32947789041248066,
+            "fingertip": 0.25623841482087734,
+            "palm": 0.4142836947666419
+          },
+          "mouse_peak_speed": 442.11361541109966,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.2853400033190004,
+            "fingertip": 0.27192940517230124,
+            "palm": 0.4427305915086983
+          },
+          "mouse_peak_speed": 195.07575341374732,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.23719197685365917,
+            "fingertip": 0.2005256026719709,
+            "palm": 0.5622824204743699
+          },
+          "mouse_peak_speed": 211.1991910138596,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_017_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_017",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 5,
+      "n_trials_skipped": 8,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 5
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.005976353933487269,
+        "fingertip": 0.01963149974932927,
+        "palm": 0.9743921463171835
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.0,
+            "fingertip": 0.0033033370828646417,
+            "palm": 0.9966966629171353
+          },
+          "mouse_peak_speed": 97.01819703463252,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.001487973458667404,
+            "fingertip": 0.004054210319695389,
+            "palm": 0.9944578162216372
+          },
+          "mouse_peak_speed": 216.65658783251584,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.006624001441566744,
+            "fingertip": 0.025929069156939183,
+            "palm": 0.9674469294014941
+          },
+          "mouse_peak_speed": 288.70519083255255,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.009867736127497162,
+            "fingertip": 0.05372095902729995,
+            "palm": 0.9364113048452029
+          },
+          "mouse_peak_speed": 144.76076357342174,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.011902058639705034,
+            "fingertip": 0.011149923159847183,
+            "palm": 0.9769480182004479
+          },
+          "mouse_peak_speed": 158.53365890858774,
+          "marker_ok_ratio": 0.75,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_018_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_018",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "fingertip": 12,
+        "claw": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.07692307692307693,
+        "fingertip": 0.9230769230769231,
+        "palm": 0.0
+      },
+      "mean_probability": {
+        "claw": 0.2870174322388277,
+        "fingertip": 0.527435108312726,
+        "palm": 0.18554745944844625
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 2,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2310022600106684,
+            "fingertip": 0.6199038868025183,
+            "palm": 0.1490938531868133
+          },
+          "mouse_peak_speed": 296.0042412035651,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 10,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3295048634272095,
+            "fingertip": 0.46367905442635504,
+            "palm": 0.2068160821464354
+          },
+          "mouse_peak_speed": 236.42866015387182,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 3,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3285316835097993,
+            "fingertip": 0.4730365348804146,
+            "palm": 0.19843178160978614
+          },
+          "mouse_peak_speed": 268.023020394162,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 9,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2950380157479148,
+            "fingertip": 0.49771988576831677,
+            "palm": 0.20724209848376868
+          },
+          "mouse_peak_speed": 237.80870436788103,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 5,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.299917055475216,
+            "fingertip": 0.5108488680642893,
+            "palm": 0.1892340764604945
+          },
+          "mouse_peak_speed": 275.95378998606543,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 1,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.23872372909763256,
+            "fingertip": 0.6081607155424934,
+            "palm": 0.15311555535987434
+          },
+          "mouse_peak_speed": 155.94644607732576,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 8,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3304594757583245,
+            "fingertip": 0.45295786605031957,
+            "palm": 0.21658265819135594
+          },
+          "mouse_peak_speed": 238.11848844811763,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 4,
+          "prediction": "claw",
+          "probability": {
+            "claw": 0.3667811462487647,
+            "fingertip": 0.3623388576124118,
+            "palm": 0.2708799961388237
+          },
+          "mouse_peak_speed": 322.51739428758805,
+          "marker_ok_ratio": 0.8333333333333334,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 7,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.3619673192577084,
+            "fingertip": 0.4747996003969844,
+            "palm": 0.1632330803453075
+          },
+          "mouse_peak_speed": 192.0208740190185,
+          "marker_ok_ratio": 0.9,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 0,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.20948897767868163,
+            "fingertip": 0.6579846565749945,
+            "palm": 0.13252636574632418
+          },
+          "mouse_peak_speed": 204.82267405275823,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 6,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.21053879332563466,
+            "fingertip": 0.6358308578677314,
+            "palm": 0.15363034880663382
+          },
+          "mouse_peak_speed": 182.75610478669532,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 11,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.2991141499440684,
+            "fingertip": 0.5510012754032982,
+            "palm": 0.14988457465263366
+          },
+          "mouse_peak_speed": 151.70553260404424,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 12,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.23015914962313816,
+            "fingertip": 0.548394348675312,
+            "palm": 0.22144650170155014
+          },
+          "mouse_peak_speed": 138.82919724231084,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_019_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_019",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.14620356741703572,
+        "fingertip": 0.15975615607428534,
+        "palm": 0.6940402765086789
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.08921699915228273,
+            "fingertip": 0.1607763699122951,
+            "palm": 0.7500066309354223
+          },
+          "mouse_peak_speed": 86.56651113851386,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.08093577493214682,
+            "fingertip": 0.03664371218149942,
+            "palm": 0.8824205128863538
+          },
+          "mouse_peak_speed": 169.49673244801426,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.15415519739573896,
+            "fingertip": 0.09117307253158406,
+            "palm": 0.754671730072677
+          },
+          "mouse_peak_speed": 290.64180058966053,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16447575201230993,
+            "fingertip": 0.1736539697302018,
+            "palm": 0.6618702782574882
+          },
+          "mouse_peak_speed": 151.38563266763518,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1782702624143707,
+            "fingertip": 0.22244775950639975,
+            "palm": 0.5992819780792296
+          },
+          "mouse_peak_speed": 217.00555924303478,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1825223518966574,
+            "fingertip": 0.3078349780283759,
+            "palm": 0.5096426700749667
+          },
+          "mouse_peak_speed": 265.7894736842105,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1896267045750878,
+            "fingertip": 0.25086149752555864,
+            "palm": 0.5595117978993537
+          },
+          "mouse_peak_speed": 164.18285557304142,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.13713620761430168,
+            "fingertip": 0.18925753240240162,
+            "palm": 0.6736062599832968
+          },
+          "mouse_peak_speed": 166.49918538987586,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12420553930526154,
+            "fingertip": 0.11876959086162345,
+            "palm": 0.7570248698331151
+          },
+          "mouse_peak_speed": 169.59467913775364,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16418371518114644,
+            "fingertip": 0.20064894868069538,
+            "palm": 0.6351673361381583
+          },
+          "mouse_peak_speed": 278.5327060180126,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12738958117491841,
+            "fingertip": 0.13782621543315515,
+            "palm": 0.7347842033919265
+          },
+          "mouse_peak_speed": 241.25143141931053,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 7,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.15879252741678732,
+            "fingertip": 0.10538839228375783,
+            "palm": 0.7358190802994549
+          },
+          "mouse_peak_speed": 282.11554481225784,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.14973576335045427,
+            "fingertip": 0.08154798988816113,
+            "palm": 0.7687162467613847
+          },
+          "mouse_peak_speed": 91.44616494354551,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "source_file": "test\\outputs\\user_020_G102_free_B_session_01_trial_features_v2.json",
+      "user_id": "user_020",
+      "mouse_id": "G102",
+      "condition": "B",
+      "n_trials_used": 13,
+      "n_trials_skipped": 0,
+      "n_trials_skipped_by_speed": 0,
+      "prediction_counts": {
+        "palm": 12,
+        "fingertip": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.07692307692307693,
+        "palm": 0.9230769230769231
+      },
+      "mean_probability": {
+        "claw": 0.13467927564220447,
+        "fingertip": 0.2693014194669703,
+        "palm": 0.5960193048908253
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      },
+      "trial_results": [
+        {
+          "trial_index": 0,
+          "target_id": 8,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.11117461710863426,
+            "fingertip": 0.2732891501654327,
+            "palm": 0.615536232725933
+          },
+          "mouse_peak_speed": 176.59654575568115,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 1,
+          "target_id": 0,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.06951892779114366,
+            "fingertip": 0.2073715855009195,
+            "palm": 0.7231094867079367
+          },
+          "mouse_peak_speed": 215.57323541658982,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 2,
+          "target_id": 3,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1119056197142028,
+            "fingertip": 0.175004745448711,
+            "palm": 0.7130896348370861
+          },
+          "mouse_peak_speed": 140.04500457276268,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 3,
+          "target_id": 12,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.09290306590535546,
+            "fingertip": 0.16806213661749786,
+            "palm": 0.7390347974771466
+          },
+          "mouse_peak_speed": 180.89119777929434,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 4,
+          "target_id": 9,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.15313448115063233,
+            "fingertip": 0.26069651647601116,
+            "palm": 0.5861690023733566
+          },
+          "mouse_peak_speed": 173.21811958295416,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 5,
+          "target_id": 2,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.09864352596998224,
+            "fingertip": 0.14200924388990196,
+            "palm": 0.7593472301401158
+          },
+          "mouse_peak_speed": 237.36539724645766,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 6,
+          "target_id": 5,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16232367560881805,
+            "fingertip": 0.30320428249399806,
+            "palm": 0.5344720418971838
+          },
+          "mouse_peak_speed": 154.89867039544845,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 7,
+          "target_id": 10,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.12937977243438642,
+            "fingertip": 0.19566766950179984,
+            "palm": 0.6749525580638134
+          },
+          "mouse_peak_speed": 111.30321073035661,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 8,
+          "target_id": 7,
+          "prediction": "fingertip",
+          "probability": {
+            "claw": 0.15030681854845013,
+            "fingertip": 0.4931094736350904,
+            "palm": 0.3565837078164595
+          },
+          "mouse_peak_speed": 229.9021080267906,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 9,
+          "target_id": 1,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.1319654901975834,
+            "fingertip": 0.30809861301525676,
+            "palm": 0.5599358967871596
+          },
+          "mouse_peak_speed": 160.5522344648935,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 10,
+          "target_id": 11,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.14362266667914583,
+            "fingertip": 0.3059072947366749,
+            "palm": 0.5504700385841791
+          },
+          "mouse_peak_speed": 137.8979405716013,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 11,
+          "target_id": 4,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.16330071833724466,
+            "fingertip": 0.33166699652304366,
+            "palm": 0.5050322851397117
+          },
+          "mouse_peak_speed": 160.97457771380823,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        },
+        {
+          "trial_index": 12,
+          "target_id": 6,
+          "prediction": "palm",
+          "probability": {
+            "claw": 0.23265120390307853,
+            "fingertip": 0.3368307450662761,
+            "palm": 0.4305180510306453
+          },
+          "mouse_peak_speed": 57.71503210384555,
+          "marker_ok_ratio": 1.0,
+          "hand_ok_ratio": 1.0
+        }
+      ]
+    }
+  ],
+  "user_summary": {
+    "user_001": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 12,
+        "palm": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.9230769230769231,
+        "palm": 0.07692307692307693
+      },
+      "mean_probability": {
+        "claw": 0.23454677583867709,
+        "fingertip": 0.5962171912822671,
+        "palm": 0.16923603287905584
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      }
+    },
+    "user_002": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0022785496817870985,
+        "fingertip": 0.0011480776441406362,
+        "palm": 0.9965733726740722
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_003": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.06531417071004902,
+        "fingertip": 0.13695916062416982,
+        "palm": 0.7977266686657812
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_004": {
+      "n_files": 1,
+      "n_trials_used": 1,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.11130262097497798,
+        "fingertip": 0.21026335070528887,
+        "palm": 0.6784340283197332
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_005": {
+      "n_files": 1,
+      "n_trials_used": 12,
+      "prediction_counts": {
+        "claw": 3,
+        "fingertip": 0,
+        "palm": 9
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.25,
+        "fingertip": 0.0,
+        "palm": 0.75
+      },
+      "mean_probability": {
+        "claw": 0.2818588096011627,
+        "fingertip": 0.2291023610837438,
+        "palm": 0.4890388293150934
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_006": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.05688329065139452,
+        "fingertip": 0.06785234316255284,
+        "palm": 0.8752643661860527
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_007": {
+      "n_files": 1,
+      "n_trials_used": 3,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 3
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0944120626105932,
+        "fingertip": 0.15928423439027534,
+        "palm": 0.7463037029991314
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_008": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.06402653569266144,
+        "fingertip": 0.06442100060288963,
+        "palm": 0.8715524637044489
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_009": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 4,
+        "fingertip": 1,
+        "palm": 8
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.3076923076923077,
+        "fingertip": 0.07692307692307693,
+        "palm": 0.6153846153846154
+      },
+      "mean_probability": {
+        "claw": 0.3481208700536449,
+        "fingertip": 0.2589144730032105,
+        "palm": 0.39296465694314453
+      },
+      "tendency": {
+        "type": "hybrid",
+        "main": "palm",
+        "secondary": "claw",
+        "description": "palm + claw"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm + claw hybrid tendency. Since palm is the stronger tendency, recommend the mouse for palm."
+      }
+    },
+    "user_010": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.0072970743728800885,
+        "fingertip": 0.00707586017523231,
+        "palm": 0.9856270654518876
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_011": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.003254184011513519,
+        "fingertip": 0.037680529419289954,
+        "palm": 0.9590652865691965
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_012": {
+      "n_files": 1,
+      "n_trials_used": 9,
+      "prediction_counts": {
+        "claw": 1,
+        "fingertip": 0,
+        "palm": 8
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.1111111111111111,
+        "fingertip": 0.0,
+        "palm": 0.8888888888888888
+      },
+      "mean_probability": {
+        "claw": 0.06296330439747978,
+        "fingertip": 0.06106438084094698,
+        "palm": 0.8759723147615733
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_013": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 1,
+        "fingertip": 0,
+        "palm": 12
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.07692307692307693,
+        "fingertip": 0.0,
+        "palm": 0.9230769230769231
+      },
+      "mean_probability": {
+        "claw": 0.25680569136644193,
+        "fingertip": 0.07691637867056786,
+        "palm": 0.6662779299629903
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_014": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.017075656272007363,
+        "fingertip": 0.016194108651670286,
+        "palm": 0.9667302350763224
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_015": {
+      "n_files": 1,
+      "n_trials_used": 11,
+      "prediction_counts": {
+        "claw": 4,
+        "fingertip": 6,
+        "palm": 1
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.36363636363636365,
+        "fingertip": 0.5454545454545454,
+        "palm": 0.09090909090909091
+      },
+      "mean_probability": {
+        "claw": 0.2937318654744682,
+        "fingertip": 0.5331268101013901,
+        "palm": 0.17314132442414168
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      }
+    },
+    "user_016": {
+      "n_files": 1,
+      "n_trials_used": 12,
+      "prediction_counts": {
+        "claw": 6,
+        "fingertip": 0,
+        "palm": 6
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.5,
+        "fingertip": 0.0,
+        "palm": 0.5
+      },
+      "mean_probability": {
+        "claw": 0.37457674308828404,
+        "fingertip": 0.23234759412966147,
+        "palm": 0.39307566278205447
+      },
+      "tendency": {
+        "type": "hybrid",
+        "main": "palm",
+        "secondary": "claw",
+        "description": "palm + claw"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm + claw hybrid tendency. Since palm is the stronger tendency, recommend the mouse for palm."
+      }
+    },
+    "user_017": {
+      "n_files": 1,
+      "n_trials_used": 5,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 5
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.005976353933487269,
+        "fingertip": 0.01963149974932927,
+        "palm": 0.9743921463171835
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_018": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 1,
+        "fingertip": 12,
+        "palm": 0
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.07692307692307693,
+        "fingertip": 0.9230769230769231,
+        "palm": 0.0
+      },
+      "mean_probability": {
+        "claw": 0.2870174322388277,
+        "fingertip": 0.527435108312726,
+        "palm": 0.18554745944844625
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "fingertip",
+        "secondary": null,
+        "description": "fingertip"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteV3ES",
+        "reason": "fingertip dominant tendency."
+      }
+    },
+    "user_019": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 0,
+        "palm": 13
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.0,
+        "palm": 1.0
+      },
+      "mean_probability": {
+        "claw": 0.14620356741703572,
+        "fingertip": 0.15975615607428534,
+        "palm": 0.6940402765086789
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    },
+    "user_020": {
+      "n_files": 1,
+      "n_trials_used": 13,
+      "prediction_counts": {
+        "claw": 0,
+        "fingertip": 1,
+        "palm": 12
+      },
+      "prediction_ratio_by_vote": {
+        "claw": 0.0,
+        "fingertip": 0.07692307692307693,
+        "palm": 0.9230769230769231
+      },
+      "mean_probability": {
+        "claw": 0.13467927564220447,
+        "fingertip": 0.2693014194669703,
+        "palm": 0.5960193048908253
+      },
+      "tendency": {
+        "type": "dominant",
+        "main": "palm",
+        "secondary": null,
+        "description": "palm"
+      },
+      "recommendation_placeholder": {
+        "note": "Prototype only; validate using task performance and questionnaire results.",
+        "recommended_mouse": "XliteCrazyLight",
+        "reason": "palm dominant tendency."
+      }
+    }
+  }
+}
