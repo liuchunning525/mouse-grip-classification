@@ -1,0 +1,25 @@
+# raw datasets
+data/raw/
+data/outputs/
+test/raw/
+test/outputs/
+
+# trained models
+models/trained/
+
+# videos
+*.mp4
+*.webm
+*.avi
+
+# python cache
+__pycache__/
+*.pyc
+
+# system
+.vscode/
+.DS_Store
+Thumbs.db
+
+# large datasets
+training_dataset_3mouse_20users.json
