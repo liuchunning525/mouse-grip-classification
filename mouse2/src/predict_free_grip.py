@@ -108,7 +108,7 @@ def add_relative_structure_features(f):
 
 def infer_meta_from_path(path):
     parts = list(Path(path).parts)
-    valid_mice = {"G102", "X2H", "XliteV3ES"}
+    valid_mice = {"G102", "X2H", "XliteV3ES", "XliteCrazyLight"}
 
     user_id = "unknown_user"
     mouse_id = "unknown_mouse"
@@ -264,17 +264,17 @@ def normalize_prob(prob_sum):
         return {k: 0.0 for k in LABELS}
     return {k: float(v / total) for k, v in prob_sum.items()}
 
-
-def decide_tendency(prob, hybrid_gap=0.15, min_second=0.25):
+def decide_tendency(prob, hybrid_gap=0.20, min_second=0.25):
     ordered = sorted(prob.items(), key=lambda kv: kv[1], reverse=True)
+
     top, top_v = ordered[0]
     second, second_v = ordered[1]
 
     if second_v >= min_second and (top_v - second_v) <= hybrid_gap:
         combo = {top, second}
 
-        # Palm + Fingertip is considered unrealistic/unreliable.
-        # Use dominant-only tendency instead.
+        # Palm + Fingertip is not treated as a valid hybrid tendency.
+        # Use the higher-probability class instead.
         if combo == {"palm", "fingertip"}:
             return {
                 "type": "dominant",
@@ -300,64 +300,42 @@ def decide_tendency(prob, hybrid_gap=0.15, min_second=0.25):
 
 def recommendation_placeholder(tendency):
     """
-    Prototype recommendation rule among the three available mice:
-    - G102: smaller / lower-back / symmetric, suitable for fingertip or palm+fingertip.
-    - X2H: high-back symmetric mouse, suitable for claw or claw+fingertip.
-    - XliteV3ES: ergonomic supportive mouse, suitable for palm or palm+claw.
+    Prototype recommendation rule.
 
-    This is not a final validated recommendation model.
-    It should be validated by comparing task performance and questionnaire feedback.
+    G102 is used only as the baseline mouse for detecting natural grip tendency.
+    It is NOT used as a recommendation target.
+
+    Current recommendation candidates:
+    - Palm      -> XliteCrazyLight
+    - Claw      -> X2H
+    - Fingertip -> XliteV3ES
+
+    For hybrid tendencies, the recommendation follows the stronger/main grip.
     """
     main = tendency["main"]
     sec = tendency.get("secondary")
-    combo = {main, sec} if sec else {main}
 
-    if combo == {"palm", "fingertip"}:
-         secondary = None
-         combo = {main}
+    grip_to_mouse = {
+        "palm": "XliteCrazyLight",
+        "claw": "X2H",
+        "fingertip": "XliteV3ES",
+    }
 
-    if combo == {"palm"}:
-        recommended_mouse = "XliteV3ES"
-        reason = "Palm dominant users usually need stronger palm support and ergonomic shape."
-        category = "palm_dominant"
+    recommended_mouse = grip_to_mouse.get(main, "undetermined")
 
-    elif combo == {"claw"}:
-        recommended_mouse = "X2H"
-        reason = "Claw dominant users may benefit from a higher back shape that supports the rear palm while allowing curled fingers."
-        category = "claw_dominant"
-
-    elif combo == {"fingertip"}:
-        recommended_mouse = "G102"
-        reason = "Fingertip dominant users often benefit from a smaller and lower-profile mouse that allows finger-based control."
-        category = "fingertip_dominant"
-
-    elif combo == {"claw", "fingertip"}:
-        recommended_mouse = "X2H"
-        reason = "Claw + Fingertip hybrid users may benefit from a lightweight medium-size mouse with high-back support."
-        category = "claw_fingertip_hybrid"
-
-    elif combo == {"palm", "claw"}:
-        recommended_mouse = "XliteV3ES"
-        reason = "Palm + Claw hybrid users may benefit from a supportive ergonomic mouse with enough palm contact."
-        category = "palm_claw_hybrid"
-
-    elif combo == {"palm", "fingertip"}:
-        recommended_mouse = "G102"
-        reason = "Palm + Fingertip hybrid users may benefit from a balanced smaller mouse that still allows finger adjustment."
-        category = "palm_fingertip_hybrid"
-
+    if sec is None:
+        reason = f"{main} dominant tendency."
     else:
-        recommended_mouse = "undetermined"
-        reason = "No clear recommendation. More free-use data or questionnaire feedback is needed."
-        category = "undetermined"
+        reason = (
+            f"{main} + {sec} hybrid tendency. "
+            f"Since {main} is the stronger tendency, recommend the mouse for {main}."
+        )
 
     return {
         "note": "Prototype only; validate using task performance and questionnaire results.",
         "recommended_mouse": recommended_mouse,
-        "recommendation_category": category,
         "reason": reason,
     }
-
 
 
 def predict_file(path, model, feature_columns, label_names=None, only_stable=True, max_peak_speed=None,
@@ -474,13 +452,14 @@ def aggregate_by_user(file_results, hybrid_gap=0.15, min_second=0.25):
 def main():
     parser = argparse.ArgumentParser(description="Predict free/natural grip tendency using trained grip classifier.")
     parser.add_argument("--input_root", required=True, help="Folder containing free *_trial_features_v2.json files.")
+    parser.add_argument("--baseline_mouse", default="G102", help="Only use this mouse to infer natural grip tendency. Default: G102.")
     parser.add_argument("--model", default="models/trained/grip_model_3mouse.pkl")
     parser.add_argument("--feature_columns", default=None)
     parser.add_argument("--label_encoder", default=None, help="Optional label encoder JSON, e.g. models/trained/label_encoder_3mouse.json")
     parser.add_argument("--output", default="data/datasets/free_prediction_report.json")
     parser.add_argument("--include_unstable", action="store_true")
     parser.add_argument("--max_peak_speed", type=float, default=None)
-    parser.add_argument("--hybrid_gap", type=float, default=0.15)
+    parser.add_argument("--hybrid_gap", type=float, default=0.20)
     parser.add_argument("--min_second", type=float, default=0.25)
     args = parser.parse_args()
 
@@ -492,8 +471,19 @@ def main():
     label_names = load_label_names(args.model, args.label_encoder)
 
     files = sorted(Path(args.input_root).rglob("*_trial_features_v2.json"))
+
+    # Use only the baseline mouse videos to infer user's natural grip tendency.
+    # Default: G102.
+    if args.baseline_mouse:
+        baseline = args.baseline_mouse.lower()
+        files = [
+            f for f in files
+            if baseline in f.name.lower() or any(baseline == part.lower() for part in f.parts)
+        ]
+
     if not files:
         print("[ERROR] No *_trial_features_v2.json found under:", args.input_root)
+        print("[ERROR] baseline_mouse:", args.baseline_mouse)
         return
 
     file_results = []
@@ -529,6 +519,7 @@ def main():
     report = {
         "meta": {
             "input_root": args.input_root,
+            "baseline_mouse": args.baseline_mouse,
             "model": args.model,
             "feature_columns_count": len(feature_columns),
             "label_names": label_names,

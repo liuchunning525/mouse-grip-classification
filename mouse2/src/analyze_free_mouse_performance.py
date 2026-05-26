@@ -7,7 +7,7 @@ from pathlib import Path
 from collections import defaultdict
 
 
-VALID_MICE = ["G102", "X2H", "XliteV3ES"]
+VALID_MICE = ["XliteCrazyLight", "XliteV3ES", "X2H", "G102"]
 
 
 def load_json(path):
@@ -237,11 +237,12 @@ def rank_mice_for_user(items):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Analyze free-use mouse performance from first hit click to last hit click."
+        description="Analyze free-use mouse performance among recommendation candidate mice from first hit click to last hit click."
     )
     parser.add_argument("--raw_root", default="test/raw", help="Folder containing free task_log.json files.")
     parser.add_argument("--prediction_report", default="data/datasets/free_prediction_report.json")
     parser.add_argument("--output", default="data/datasets/free_mouse_performance_report.json")
+    parser.add_argument("--candidate_mice", default="XliteCrazyLight,XliteV3ES,X2H", help="Comma-separated mice used for recommendation validation. G102 is excluded by default.")
     args = parser.parse_args()
 
     task_logs = sorted(Path(args.raw_root).rglob("*_task_log.json"))
@@ -261,8 +262,16 @@ def main():
         if result is not None:
             rows.append(result)
 
+    candidate_mice = [x.strip() for x in args.candidate_mice.split(",") if x.strip()]
+    candidate_set = set(candidate_mice)
+
+    # For recommendation validation, compare only the recommended-candidate mice.
+    # G102 is used as baseline for grip prediction and is excluded by default.
+    rows = [r for r in rows if r.get("mouse_id") in candidate_set]
+
     if not rows:
-        print("[ERROR] No valid free task logs found.")
+        print("[ERROR] No valid free task logs found for candidate mice.")
+        print("[ERROR] candidate_mice:", candidate_mice)
         return
 
     recommendations = load_recommendations(args.prediction_report)
@@ -320,6 +329,7 @@ def main():
     report = {
         "meta": {
             "raw_root": args.raw_root,
+            "candidate_mice": candidate_mice,
             "prediction_report": args.prediction_report,
             "n_task_logs": len(task_logs),
             "n_free_records": len(rows),
